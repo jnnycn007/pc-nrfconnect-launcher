@@ -19,7 +19,7 @@ const initialState: State = {
 };
 
 const slice = createSlice({
-    name: 'settings',
+    name: 'telemetry',
     initialState,
     reducers: {
         showTelemetryDialog(state) {
