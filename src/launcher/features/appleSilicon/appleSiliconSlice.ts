@@ -27,7 +27,7 @@ const initialState: State = {
 };
 
 const slice = createSlice({
-    name: 'settings',
+    name: 'apple silicon',
     initialState,
     reducers: {
         showAppleSiliconDialog(state) {
