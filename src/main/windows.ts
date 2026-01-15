@@ -105,7 +105,7 @@ const getSizeOptions = (app: LaunchableApp) => {
         };
     }
 
-    const lastWindowState = getLastWindowState();
+    const lastWindowState = getLastWindowState(app.name);
 
     let { x, y } = lastWindowState;
     const { width, height } = lastWindowState;
@@ -164,14 +164,14 @@ export const openAppWindow = (app: LaunchableApp, args: string[]) => {
 
     if (!isQuickStartApp(app)) {
         appWindow.webContents.on('did-finish-load', () => {
-            if (getLastWindowState().maximized) {
+            if (getLastWindowState(app.name).maximized) {
                 appWindow.maximize();
             }
         });
 
         appWindow.on('close', () => {
             const bounds = appWindow.getBounds();
-            setLastWindowState({
+            setLastWindowState(app.name, {
                 x: bounds.x,
                 y: bounds.y,
                 width: bounds.width,

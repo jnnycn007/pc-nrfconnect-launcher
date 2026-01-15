@@ -26,7 +26,7 @@ export type ShownStates = {
 interface Schema {
     lastBundledAppInstalledVersion: string;
     isQuickStartInfoShownBefore: boolean;
-    lastWindowState: WindowState;
+    [lastWindowState: `lastWindowState.${string}`]: WindowState;
     updateCheck: {
         doOnStartup: boolean;
         lastUpdate?: Date;
@@ -54,10 +54,10 @@ const defaultWindowSize = {
     height: 800,
     maximized: false,
 };
-export const getLastWindowState = () =>
-    store.get('lastWindowState', defaultWindowSize);
-export const setLastWindowState = (lastWindowState: WindowState) =>
-    store.set('lastWindowState', lastWindowState);
+export const getLastWindowState = (app: string) =>
+    store.get(`lastWindowState.${app}`, defaultWindowSize);
+export const setLastWindowState = (app: string, lastWindowState: WindowState) =>
+    store.set(`lastWindowState.${app}`, lastWindowState);
 
 export const getCheckForUpdatesAtStartup = () =>
     store.get('updateCheck')?.doOnStartup ?? true;
