@@ -54,8 +54,13 @@ const defaultWindowSize = {
     height: 800,
     maximized: false,
 };
+
+// Keep as backup for some versions so people don't suddenly jump to default size
+export const getLastWindowStateLegacy = () =>
+    store.get('lastWindowState', defaultWindowSize);
+
 export const getLastWindowState = (app: string) =>
-    store.get(`lastWindowState.${app}`, defaultWindowSize);
+    store.get(`lastWindowState.${app}`, getLastWindowStateLegacy());
 export const setLastWindowState = (app: string, lastWindowState: WindowState) =>
     store.set(`lastWindowState.${app}`, lastWindowState);
 
