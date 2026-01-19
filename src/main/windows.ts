@@ -52,13 +52,52 @@ export const openLauncherWindow = () => {
     }
 };
 
+export const keepPositionWithinBounds = ({
+    x,
+    y,
+    height,
+    width,
+}: {
+    x?: number;
+    y?: number;
+    height: number;
+    width: number;
+}) => {
+    if (x && y) {
+        const { bounds } = screen.getDisplayMatching({
+            x,
+            y,
+            width,
+            height,
+        } as Rectangle);
+        const left = Math.max(x, bounds.x);
+        const top = Math.max(y, bounds.y);
+        const right = Math.min(x + width, bounds.x + bounds.width);
+        const bottom = Math.min(y + height, bounds.y + bounds.height);
+        if (left > right || top > bottom) {
+            // the window would be off screen, let's open it where the launcher is
+            x = undefined;
+            y = undefined;
+        }
+    }
+
+    return { x, y };
+};
+
 const createLauncherWindow = () => {
+    const launcherRef = 'Launcher';
+    const lastWindowState = getLastWindowState(launcherRef);
+
+    const { x, y } = keepPositionWithinBounds(lastWindowState);
+    const { width, height } = lastWindowState;
     const window = createWindow({
         title: `nRF Connect for Desktop v${packageJson.version}`,
         url: `file://${getBundledResourcePath()}/launcher.html`,
         icon: getNrfConnectForDesktopIcon(),
-        width: 760,
-        height: 600,
+        x,
+        y,
+        width,
+        height,
         minHeight: 500,
         minWidth: 600,
         center: true,
@@ -67,7 +106,20 @@ const createLauncherWindow = () => {
 
     registerLauncherWindowFromMain(window);
 
+    window.webContents.on('did-finish-load', () => {
+        if (lastWindowState.maximized) {
+            window.maximize();
+        }
+    });
+
     window.on('close', event => {
+        setLastWindowState(launcherRef, {
+            x: lastWindowState.x,
+            y: lastWindowState.y,
+            width: window.getBounds().width,
+            height: window.getBounds().height,
+            maximized: window.isMaximized(),
+        });
         if (appWindows.length > 0) {
             event.preventDefault();
             window.hide();
@@ -107,23 +159,8 @@ const getSizeOptions = (app: LaunchableApp) => {
 
     const lastWindowState = getLastWindowState(app.name);
 
-    let { x, y } = lastWindowState;
+    const { x, y } = keepPositionWithinBounds(lastWindowState);
     const { width, height } = lastWindowState;
-
-    if (x && y) {
-        const { bounds } = screen.getDisplayMatching(
-            lastWindowState as Rectangle,
-        );
-        const left = Math.max(x, bounds.x);
-        const top = Math.max(y, bounds.y);
-        const right = Math.min(x + width, bounds.x + bounds.width);
-        const bottom = Math.min(y + height, bounds.y + bounds.height);
-        if (left > right || top > bottom) {
-            // the window would be off screen, let's open it where the launcher is
-            x = undefined;
-            y = undefined;
-        }
-    }
 
     return {
         x,
