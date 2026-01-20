@@ -98,11 +98,12 @@ const addMaximizeAndStoreSizeHandlers = (
     });
 
     window.on('close', () => {
+        const bounds = window.getBounds();
         setLastWindowState(appName, {
-            x: lastWindowState.x,
-            y: lastWindowState.y,
-            width: window.getBounds().width,
-            height: window.getBounds().height,
+            x: bounds.x,
+            y: bounds.y,
+            width: bounds.width,
+            height: bounds.height,
             maximized: window.isMaximized(),
         });
     });
