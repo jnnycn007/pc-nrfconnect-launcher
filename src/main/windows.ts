@@ -22,6 +22,7 @@ import packageJson from '../../package.json';
 import {
     getLastWindowState,
     setLastWindowState,
+    WindowState,
 } from '../common/persistedStore';
 import { LOCAL } from '../common/sources';
 import {
@@ -75,13 +76,35 @@ export const keepPositionWithinBounds = ({
         const right = Math.min(x + width, bounds.x + bounds.width);
         const bottom = Math.min(y + height, bounds.y + bounds.height);
         if (left > right || top > bottom) {
-            // the window would be off screen, let's open it where the launcher is
+            // the window would be off screen
             x = undefined;
             y = undefined;
         }
     }
 
     return { x, y };
+};
+
+const addMaximizeAndStoreSizeHandlers = (
+    window: BrowserWindow,
+    appName: string,
+    lastWindowState: WindowState,
+) => {
+    window.webContents.on('did-finish-load', () => {
+        if (lastWindowState.maximized) {
+            window.maximize();
+        }
+    });
+
+    window.on('close', () => {
+        setLastWindowState(appName, {
+            x: lastWindowState.x,
+            y: lastWindowState.y,
+            width: window.getBounds().width,
+            height: window.getBounds().height,
+            maximized: window.isMaximized(),
+        });
+    });
 };
 
 const createLauncherWindow = () => {
@@ -106,20 +129,9 @@ const createLauncherWindow = () => {
 
     registerLauncherWindowFromMain(window);
 
-    window.webContents.on('did-finish-load', () => {
-        if (lastWindowState.maximized) {
-            window.maximize();
-        }
-    });
+    addMaximizeAndStoreSizeHandlers(window, launcherRef, lastWindowState);
 
     window.on('close', event => {
-        setLastWindowState(launcherRef, {
-            x: lastWindowState.x,
-            y: lastWindowState.y,
-            width: window.getBounds().width,
-            height: window.getBounds().height,
-            maximized: window.isMaximized(),
-        });
         if (appWindows.length > 0) {
             event.preventDefault();
             window.hide();
@@ -200,22 +212,11 @@ export const openAppWindow = (app: LaunchableApp, args: string[]) => {
     });
 
     if (!isQuickStartApp(app)) {
-        appWindow.webContents.on('did-finish-load', () => {
-            if (getLastWindowState(app.name).maximized) {
-                appWindow.maximize();
-            }
-        });
-
-        appWindow.on('close', () => {
-            const bounds = appWindow.getBounds();
-            setLastWindowState(app.name, {
-                x: bounds.x,
-                y: bounds.y,
-                width: bounds.width,
-                height: bounds.height,
-                maximized: appWindow.isMaximized(),
-            });
-        });
+        addMaximizeAndStoreSizeHandlers(
+            appWindow,
+            app.name,
+            getLastWindowState(app.name),
+        );
     }
 
     let reloading = false;

@@ -10,7 +10,7 @@ import packageJson from '../../package.json';
 import type { TokenInformation } from '../ipc/artifactoryToken';
 import type { SourceName } from './sources';
 
-type WindowState = {
+export type WindowState = {
     x?: number;
     y?: number;
     width: number;
