@@ -22,6 +22,7 @@ import packageJson from '../../package.json';
 import {
     getLastWindowState,
     setLastWindowState,
+    windowSizeLauncherKey,
     WindowState,
 } from '../common/persistedStore';
 import { LOCAL } from '../common/sources';
@@ -108,8 +109,7 @@ const addMaximizeAndStoreSizeHandlers = (
 };
 
 const createLauncherWindow = () => {
-    const launcherRef = 'Launcher';
-    const lastWindowState = getLastWindowState(launcherRef);
+    const lastWindowState = getLastWindowState(windowSizeLauncherKey);
 
     const { x, y } = keepPositionWithinBounds(lastWindowState);
     const { width, height } = lastWindowState;
@@ -129,7 +129,11 @@ const createLauncherWindow = () => {
 
     registerLauncherWindowFromMain(window);
 
-    addMaximizeAndStoreSizeHandlers(window, launcherRef, lastWindowState);
+    addMaximizeAndStoreSizeHandlers(
+        window,
+        windowSizeLauncherKey,
+        lastWindowState,
+    );
 
     window.on('close', event => {
         if (appWindows.length > 0) {

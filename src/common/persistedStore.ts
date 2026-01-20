@@ -49,18 +49,28 @@ const store = new Store<Schema>();
 
 export const resetStore = () => store.clear();
 
-const defaultWindowSize = {
+export const windowSizeLauncherKey = 'Launcher';
+const defaultAppWindowSize = {
     width: 1024,
     height: 800,
     maximized: false,
 };
+const defaultLauncherWindowSize = {
+    width: 760,
+    height: 600,
+    maximized: false,
+};
 
-// Keep as backup for some versions so people don't suddenly jump to default size
-export const getLastWindowStateLegacy = () =>
-    store.get('lastWindowState', defaultWindowSize);
+export const getLastWindowStateLegacy = (app: string) => {
+    if (app === windowSizeLauncherKey) {
+        return defaultLauncherWindowSize;
+    }
+    // Use old 'lastWindowState' as backup for some versions so people don't suddenly jump to non-persisted size
+    return store.get('lastWindowState', defaultAppWindowSize);
+};
 
 export const getLastWindowState = (app: string) =>
-    store.get(`lastWindowState.${app}`, getLastWindowStateLegacy());
+    store.get(`lastWindowState.${app}`, getLastWindowStateLegacy(app));
 export const setLastWindowState = (app: string, lastWindowState: WindowState) =>
     store.set(`lastWindowState.${app}`, lastWindowState);
 
