@@ -12,7 +12,6 @@ import {
 import {
     app as electronApp,
     BrowserWindow,
-    type Rectangle,
     screen,
     type WebContents,
 } from 'electron';
@@ -54,32 +53,21 @@ export const openLauncherWindow = () => {
     }
 };
 
-export const keepPositionWithinBounds = ({
-    x,
-    y,
-    height,
-    width,
-}: {
-    x?: number;
-    y?: number;
-    height: number;
-    width: number;
-}) => {
+const keepPositionWithinBounds = ({ x, y, height, width }: WindowState) => {
     if (x && y) {
         const { bounds } = screen.getDisplayMatching({
             x,
             y,
             width,
             height,
-        } as Rectangle);
+        });
         const left = Math.max(x, bounds.x);
         const top = Math.max(y, bounds.y);
         const right = Math.min(x + width, bounds.x + bounds.width);
         const bottom = Math.min(y + height, bounds.y + bounds.height);
         if (left > right || top > bottom) {
             // the window would be off screen
-            x = undefined;
-            y = undefined;
+            return {};
         }
     }
 
