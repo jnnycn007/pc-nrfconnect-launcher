@@ -74,17 +74,13 @@ const keepPositionWithinBounds = ({ x, y, height, width }: WindowState) => {
     return { x, y };
 };
 
-const addMaximizeAndStoreSizeHandlers = (
-    window: BrowserWindow,
-    appName: string,
-    lastWindowState: WindowState,
-) => {
+const maximizeWindow = (window: BrowserWindow) => {
     window.webContents.on('did-finish-load', () => {
-        if (lastWindowState.maximized) {
-            window.maximize();
-        }
+        window.maximize();
     });
+};
 
+const storeWindowPositionOnClose = (window: BrowserWindow, appName: string) => {
     window.on('close', () => {
         const bounds = window.getBounds();
         setLastWindowState(appName, {
@@ -118,11 +114,9 @@ const createLauncherWindow = () => {
 
     registerLauncherWindowFromMain(window);
 
-    addMaximizeAndStoreSizeHandlers(
-        window,
-        windowSizeLauncherKey,
-        lastWindowState,
-    );
+    if (lastWindowState.maximized) maximizeWindow(window);
+
+    storeWindowPositionOnClose(window, windowSizeLauncherKey);
 
     window.on('close', event => {
         if (appWindows.length > 0) {
@@ -205,11 +199,10 @@ export const openAppWindow = (app: LaunchableApp, args: string[]) => {
     });
 
     if (!isQuickStartApp(app)) {
-        addMaximizeAndStoreSizeHandlers(
-            appWindow,
-            app.name,
-            getLastWindowState(app.name),
-        );
+        const isMaximized = getLastWindowState(app.name).maximized;
+        if (isMaximized) maximizeWindow(appWindow);
+
+        storeWindowPositionOnClose(appWindow, app.name);
     }
 
     let reloading = false;
