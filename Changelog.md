@@ -1,5 +1,9 @@
 ## 5.3.0 - unreleased
 
+### Added
+
+- Restore window positions per app at startup.
+
 ### Changed
 
 - Updated bundled SEGGER J-Link to v8.76 for Windows.
