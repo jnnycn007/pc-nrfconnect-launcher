@@ -7,7 +7,7 @@
 import { enable } from '@electron/remote/main';
 import {
     BrowserWindow,
-    BrowserWindowConstructorOptions,
+    type BrowserWindowConstructorOptions,
     shell,
 } from 'electron';
 

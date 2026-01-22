@@ -15,12 +15,12 @@ import {
 
 import cleanIpcErrorMessage from '../../../common/cleanIpcErrorMessage';
 import {
-    AppSpec,
-    AppWithError,
-    DownloadableApp,
+    type AppSpec,
+    type AppWithError,
+    type DownloadableApp,
     inMain as appsInMain,
     isInstalled,
-    LaunchableApp,
+    type LaunchableApp,
 } from '../../../ipc/apps';
 import type { AppThunk } from '../../store';
 import appCompatibilityWarning, {

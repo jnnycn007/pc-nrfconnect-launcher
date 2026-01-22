@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-import { App as AppType, isInstalled } from '../../../ipc/apps';
+import { type App as AppType, isInstalled } from '../../../ipc/apps';
 import { useLauncherSelector } from '../../util/hooks';
 import WithScrollbarContainer from '../../util/WithScrollbarContainer';
 import AppFilterBar from '../filter/AppFilterBar';
@@ -14,7 +14,7 @@ import { getAppsFilter } from '../filter/filterSlice';
 import ReleaseNotesDialog from '../releaseNotes/ReleaseNotesDialog';
 import App from './App/App';
 import AppListEmpty from './AppListEmpty';
-import { DisplayedApp, getAllApps } from './appsSlice';
+import { type DisplayedApp, getAllApps } from './appsSlice';
 import ConfirmLaunchDialog from './ConfirmLaunchDialog';
 import InstallOtherVersionDialog from './InstallOtherVersionDialog';
 

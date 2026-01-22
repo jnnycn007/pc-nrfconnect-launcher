@@ -4,15 +4,15 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { SourceJson } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
+import { type SourceJson } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import fs from 'fs/promises';
 
 import {
     allStandardSourceNames,
     OFFICIAL,
-    Source,
-    SourceName,
-    SourceUrl,
+    type Source,
+    type SourceName,
+    type SourceUrl,
 } from '../../../common/sources';
 import { type AddSourceResult } from '../../../ipc/sources';
 import { getAppsRootDir } from '../../config';

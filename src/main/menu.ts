@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { BaseWindow, Menu, MenuItem } from 'electron';
+import { type BaseWindow, Menu, type MenuItem } from 'electron';
 
 const isMac = process.platform === 'darwin';
 

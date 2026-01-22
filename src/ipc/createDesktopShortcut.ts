@@ -9,7 +9,7 @@ import {
     send,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/infrastructure/rendererToMain';
 
-import { LaunchableApp } from './apps';
+import { type LaunchableApp } from './apps';
 
 const channel = 'create-desktop-shortcut';
 

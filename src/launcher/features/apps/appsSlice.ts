@@ -12,19 +12,19 @@ import {
     getLastUpdateCheckDate,
     setLastUpdateCheckDate,
 } from '../../../common/persistedStore';
-import { OFFICIAL, SourceName } from '../../../common/sources';
-import { Progress as AppInstallProgress } from '../../../ipc/appInstallProgress';
+import { OFFICIAL, type SourceName } from '../../../common/sources';
+import { type Progress as AppInstallProgress } from '../../../ipc/appInstallProgress';
 import {
-    App,
-    AppSpec,
-    DownloadableApp,
-    InstalledDownloadableApp,
+    type App,
+    type AppSpec,
+    type DownloadableApp,
+    type InstalledDownloadableApp,
     isDownloadable,
     isInstalled,
     isQuickStartApp,
     isUpdatable,
     isWithdrawn,
-    LocalApp,
+    type LocalApp,
 } from '../../../ipc/apps';
 import type { RootState } from '../../store';
 import { getAppsFilter } from '../filter/filterSlice';

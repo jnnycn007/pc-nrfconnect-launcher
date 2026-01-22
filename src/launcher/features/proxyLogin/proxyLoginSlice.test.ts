@@ -6,7 +6,7 @@
 
 import dispatchTo from '@nordicsemiconductor/pc-nrfconnect-shared/test/dispatchTo';
 
-import { RootState } from '../../store';
+import { type RootState } from '../../store';
 import reducer, {
     getIsErrorVisible,
     getProxyLoginRequest,
@@ -14,7 +14,7 @@ import reducer, {
     loginErrorDialogClosed,
     loginRequestedByServer,
     loginRequestSent,
-    State,
+    type State,
 } from './proxyLoginSlice';
 
 const authInfo = {

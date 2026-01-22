@@ -10,7 +10,7 @@ import path from 'path';
 import { uuid } from 'short-uuid';
 
 import { OFFICIAL } from '../../common/sources';
-import { isDownloadable, LaunchableApp } from '../../ipc/apps';
+import { isDownloadable, type LaunchableApp } from '../../ipc/apps';
 import { inRenderer } from '../../ipc/showErrorDialog';
 import argv from '../argv';
 import { chmod, chmodDir, copy, readFile, untar, writeFile } from '../fileUtil';

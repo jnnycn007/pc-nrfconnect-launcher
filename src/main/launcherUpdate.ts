@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { ProgressInfo } from 'builder-util-runtime';
+import { type ProgressInfo } from 'builder-util-runtime';
 import { autoUpdater, CancellationToken } from 'electron-updater';
 import { createLogger, transports } from 'winston';
 

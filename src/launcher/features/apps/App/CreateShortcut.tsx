@@ -9,7 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 import { isInstalled } from '../../../../ipc/apps';
 import { inMain } from '../../../../ipc/createDesktopShortcut';
-import { DisplayedApp, isInProgress } from '../appsSlice';
+import { type DisplayedApp, isInProgress } from '../appsSlice';
 
 const CreateShortcut: React.FC<{ app: DisplayedApp }> = ({ app }) => {
     if (!isInstalled(app)) return null;

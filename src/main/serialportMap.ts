@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { AutoDetectTypes } from '@serialport/bindings-cpp';
-import { WebContents } from 'electron';
-import { SerialPort, SerialPortOpenOptions } from 'serialport';
+import { type AutoDetectTypes } from '@serialport/bindings-cpp';
+import { type WebContents } from 'electron';
+import { type SerialPort, type SerialPortOpenOptions } from 'serialport';
 
 export type Renderer = Pick<WebContents, 'on' | 'send' | 'id'>;
 export type OpenPort = {

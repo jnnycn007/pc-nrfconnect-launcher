@@ -7,8 +7,8 @@
 import { errorDialogReducer as errorDialog } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { configureStore } from '@reduxjs/toolkit';
 import { enableMapSet } from 'immer';
-import { AnyAction } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { type AnyAction } from 'redux';
+import { type ThunkAction } from 'redux-thunk';
 
 import appleSilicon from './features/appleSilicon/appleSiliconSlice';
 import appDialogs from './features/apps/appDialogsSlice';

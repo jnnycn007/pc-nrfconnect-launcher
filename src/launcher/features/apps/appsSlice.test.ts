@@ -6,7 +6,7 @@
 
 import dispatchTo from '@nordicsemiconductor/pc-nrfconnect-shared/test/dispatchTo';
 
-import { AppSpec } from '../../../ipc/apps';
+import { type AppSpec } from '../../../ipc/apps';
 import {
     createDownloadableTestApp,
     createLocalTestApp,
@@ -19,7 +19,7 @@ import reducer, {
     removeDownloadableAppSuccess,
     resetAppInstallProgress,
     setAllLocalApps,
-    State,
+    type State,
     updateDownloadableAppInfosFailed,
     updateDownloadableAppInfosStarted,
     updateDownloadableAppInfosSuccess,

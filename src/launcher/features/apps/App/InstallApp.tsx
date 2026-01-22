@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { isInstalled, isWithdrawn } from '../../../../ipc/apps';
 import { useLauncherDispatch } from '../../../util/hooks';
 import { installDownloadableApp } from '../appsEffects';
-import { DisplayedApp, isInProgress } from '../appsSlice';
+import { type DisplayedApp, isInProgress } from '../appsSlice';
 
 const InstallApp: React.FC<{ app: DisplayedApp }> = ({ app }) => {
     const dispatch = useLauncherDispatch();

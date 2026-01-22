@@ -4,17 +4,17 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { AppInfo } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
+import { type AppInfo } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import { omit } from 'lodash';
 import path, { basename } from 'path';
 
-import { Source, type SourceWithError } from '../../common/sources';
+import { type Source, type SourceWithError } from '../../common/sources';
 import {
-    AppWithError,
-    DownloadableApp,
+    type AppWithError,
+    type DownloadableApp,
     isWithdrawn,
-    LocalApp,
-    UninstalledDownloadableApp,
+    type LocalApp,
+    type UninstalledDownloadableApp,
 } from '../../ipc/apps';
 import { inRenderer } from '../../ipc/showErrorDialog';
 import { getAppsLocalDir } from '../config';

@@ -6,7 +6,7 @@
 
 import * as mainToRenderer from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/infrastructure/mainToRenderer';
 import * as rendererToMain from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/infrastructure/rendererToMain';
-import { AuthInfo } from 'electron';
+import { type AuthInfo } from 'electron';
 
 const channel = {
     request: 'proxy-login:request',

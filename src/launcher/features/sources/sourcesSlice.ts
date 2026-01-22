@@ -15,9 +15,9 @@ import {
 import {
     allStandardSourceNames,
     isDeprecatedSource,
-    Source,
-    SourceName,
-    SourceUrl,
+    type Source,
+    type SourceName,
+    type SourceUrl,
 } from '../../../common/sources';
 import type { RootState } from '../../store';
 

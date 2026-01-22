@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { expect, Page } from '@playwright/test';
-import { ElectronApplication } from 'playwright';
+import { expect, type Page } from '@playwright/test';
+import { type ElectronApplication } from 'playwright';
 
 const getTitleOfWindow = (app: ElectronApplication, page: Page) =>
     new Promise(resolve => {

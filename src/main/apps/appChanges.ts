@@ -14,10 +14,10 @@ import shasum from 'shasum';
 import { inRenderer as appInstallProgress } from '../../ipc/appInstallProgress';
 import {
     appExists,
-    AppSpec,
-    DownloadableApp,
+    type AppSpec,
+    type DownloadableApp,
     failureReadingFile,
-    InstallResult,
+    type InstallResult,
     successfulInstall,
 } from '../../ipc/apps';
 import { getAppsLocalDir, getAppsRootDir } from '../config';

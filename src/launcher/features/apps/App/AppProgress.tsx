@@ -7,7 +7,7 @@
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-import { DisplayedApp, isInProgress, totalProgress } from '../appsSlice';
+import { type DisplayedApp, isInProgress, totalProgress } from '../appsSlice';
 
 export default ({ app }: { app: DisplayedApp }) => {
     if (!isInProgress(app)) {

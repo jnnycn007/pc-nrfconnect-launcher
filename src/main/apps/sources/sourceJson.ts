@@ -5,13 +5,13 @@
  */
 
 import {
-    SourceJson,
+    type SourceJson,
     sourceJsonSchema,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import fs from 'fs';
 import path from 'path';
 
-import { Source, SourceUrl } from '../../../common/sources';
+import { type Source, type SourceUrl } from '../../../common/sources';
 import { getAppsRootDir } from '../../config';
 import { readSchemedJsonFile, writeSchemedJsonFile } from '../../fileUtil';
 import { downloadToJson } from '../../net';

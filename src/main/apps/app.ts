@@ -5,19 +5,19 @@
  */
 
 import {
-    AppInfo,
+    type AppInfo,
     parsePackageJsonLegacyApp,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import fs from 'fs';
 import path, { basename } from 'path';
 
-import { LOCAL, Source, SourceName } from '../../common/sources';
+import { LOCAL, type Source, type SourceName } from '../../common/sources';
 import {
-    AppSpec,
-    DownloadableApp,
-    InstalledDownloadableApp,
-    LocalApp,
-    WithdrawnApp,
+    type AppSpec,
+    type DownloadableApp,
+    type InstalledDownloadableApp,
+    type LocalApp,
+    type WithdrawnApp,
 } from '../../ipc/apps';
 import { getAppsLocalDir, getAppsRootDir, getNodeModulesDir } from '../config';
 import { ifExists, readFile, readJsonFile, writeJsonFile } from '../fileUtil';

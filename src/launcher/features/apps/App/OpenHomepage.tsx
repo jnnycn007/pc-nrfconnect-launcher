@@ -9,7 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { openWindow } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import { isDownloadable } from '../../../../ipc/apps';
-import { DisplayedApp } from '../appsSlice';
+import { type DisplayedApp } from '../appsSlice';
 
 const OpenHomepage: React.FC<{ app: DisplayedApp }> = ({ app }) => {
     const homepage = isDownloadable(app) ? app.homepage : undefined;
