@@ -16,8 +16,8 @@ import {
     setShownStates as setPersistedShownStates,
     type ShownStates,
 } from '../../../common/persistedStore';
-import { SourceName } from '../../../common/sources';
-import { App, isInstalled } from '../../../ipc/apps';
+import { type SourceName } from '../../../common/sources';
+import { type App, isInstalled } from '../../../ipc/apps';
 import type { RootState } from '../../store';
 
 export type State = {

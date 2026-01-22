@@ -6,7 +6,7 @@
 
 import {
     isOpenAppOptionsDeviceSN,
-    OpenAppOptions,
+    type OpenAppOptions,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import parseArgs from 'minimist';
 

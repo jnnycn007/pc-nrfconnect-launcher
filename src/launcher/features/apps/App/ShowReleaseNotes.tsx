@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { isDownloadable, isWithdrawn } from '../../../../ipc/apps';
 import { useLauncherDispatch } from '../../../util/hooks';
 import { show as showReleaseNotes } from '../../releaseNotes/releaseNotesDialogSlice';
-import { DisplayedApp } from '../appsSlice';
+import { type DisplayedApp } from '../appsSlice';
 
 const ShowReleaseNotes: React.FC<{ app: DisplayedApp }> = ({ app }) => {
     const dispatch = useLauncherDispatch();

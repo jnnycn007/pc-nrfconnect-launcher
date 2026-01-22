@@ -8,7 +8,7 @@ import chmodr from 'chmodr';
 import fs from 'fs';
 import path from 'path';
 import targz from 'targz';
-import { z } from 'zod';
+import { type z } from 'zod';
 
 import describeError from './describeError';
 

@@ -17,7 +17,7 @@ import {
 import { getUseChineseAppServer } from '../common/persistedStore';
 import { inRenderer as appInstallProgress } from '../ipc/appInstallProgress';
 import type { AppSpec } from '../ipc/apps';
-import { TokenInformation } from '../ipc/artifactoryToken';
+import { type TokenInformation } from '../ipc/artifactoryToken';
 import { retrieveToken } from './artifactoryTokenStorage';
 import describeError from './describeError';
 import { handleLoginRequest } from './proxyLogins';

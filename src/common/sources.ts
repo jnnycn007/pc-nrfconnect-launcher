@@ -8,7 +8,7 @@ import type { UrlString } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/Me
 import {
     LOCAL,
     OFFICIAL,
-    SourceName,
+    type SourceName,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/sources';
 
 import { asShortNordicArtifactoryUrl } from './artifactoryUrl';

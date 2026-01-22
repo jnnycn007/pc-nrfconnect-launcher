@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { isDownloadable } from '../../../../ipc/apps';
 import { useLauncherDispatch } from '../../../util/hooks';
 import { showInstallOtherVersionDialog } from '../appDialogsSlice';
-import { DisplayedApp, isInProgress } from '../appsSlice';
+import { type DisplayedApp, isInProgress } from '../appsSlice';
 
 const UninstallApp: React.FC<{ app: DisplayedApp }> = ({ app }) => {
     const dispatch = useLauncherDispatch();

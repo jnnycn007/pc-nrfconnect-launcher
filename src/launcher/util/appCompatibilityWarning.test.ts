@@ -10,7 +10,7 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import { inspect } from 'util';
 
-import { LaunchableApp } from '../../ipc/apps';
+import { type LaunchableApp } from '../../ipc/apps';
 import { createDownloadableTestApp } from '../../test/testFixtures';
 import appCompatibilityWarning, {
     checkEngineIsSupported,

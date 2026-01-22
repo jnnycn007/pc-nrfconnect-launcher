@@ -5,13 +5,13 @@
  */
 
 import {
-    PackageJsonLegacyApp,
+    type PackageJsonLegacyApp,
     parsePackageJsonLegacyApp,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import fs from 'fs';
 import path from 'path';
 
-import { Source } from '../../../common/sources';
+import { type Source } from '../../../common/sources';
 import { getAppsRootDir, getNodeModulesDir } from '../../config';
 import { readFile, readJsonFile } from '../../fileUtil';
 import { installedAppPath, writeAppInfo } from '../app';

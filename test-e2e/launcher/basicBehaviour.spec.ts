@@ -4,7 +4,12 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { ElectronApplication, expect, Page, test } from '@playwright/test';
+import {
+    type ElectronApplication,
+    expect,
+    type Page,
+    test,
+} from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 

@@ -8,9 +8,9 @@ import { lowerCase, startCase } from 'lodash';
 
 import { LOCAL, OFFICIAL } from '../common/sources';
 import {
-    InstalledDownloadableApp,
-    LocalApp,
-    UninstalledDownloadableApp,
+    type InstalledDownloadableApp,
+    type LocalApp,
+    type UninstalledDownloadableApp,
 } from '../ipc/apps';
 
 const path = (appName: string) => `/path/to/${appName}`;

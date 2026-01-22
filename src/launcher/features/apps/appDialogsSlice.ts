@@ -7,7 +7,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { DownloadableApp, LaunchableApp } from '../../../ipc/apps';
+import { type DownloadableApp, type LaunchableApp } from '../../../ipc/apps';
 import type { RootState } from '../../store';
 
 type HiddenDialog = typeof hiddenDialog;

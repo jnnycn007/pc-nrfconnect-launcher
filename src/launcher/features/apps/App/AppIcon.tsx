@@ -7,9 +7,9 @@
 import React, { useEffect, useState } from 'react';
 import path from 'path';
 
-import { App, isInstalled } from '../../../../ipc/apps';
+import { type App, isInstalled } from '../../../../ipc/apps';
 import appCompatibilityWarning from '../../../util/appCompatibilityWarning';
-import { DisplayedApp, isInProgress } from '../appsSlice';
+import { type DisplayedApp, isInProgress } from '../appsSlice';
 
 const warning = (altText: string) => (
     <div>

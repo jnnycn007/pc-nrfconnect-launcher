@@ -5,22 +5,22 @@
  */
 
 import {
-    App,
-    AppSpec,
+    type App,
+    type AppSpec,
     channel as sharedChannel,
-    DownloadableApp,
+    type DownloadableApp,
     forRenderer as forRendererFromShared,
-    GetDownloadableAppsResult as SharedGetDownloadableAppsResult,
+    type GetDownloadableAppsResult as SharedGetDownloadableAppsResult,
     inMain as inMainFromShared,
-    InstalledDownloadableApp,
+    type InstalledDownloadableApp,
     isDownloadable,
     isInstalled,
     isUpdatable,
     isWithdrawn,
-    LaunchableApp,
-    LocalApp,
-    UninstalledDownloadableApp,
-    WithdrawnApp,
+    type LaunchableApp,
+    type LocalApp,
+    type UninstalledDownloadableApp,
+    type WithdrawnApp,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/apps';
 import {
     handle,

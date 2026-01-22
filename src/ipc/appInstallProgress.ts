@@ -9,7 +9,7 @@ import {
     send,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/infrastructure/mainToRenderer';
 
-import { AppSpec } from './apps';
+import { type AppSpec } from './apps';
 
 const channel = {
     start: 'app-install:start',

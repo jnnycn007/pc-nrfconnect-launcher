@@ -7,7 +7,7 @@
 import { app } from 'electron';
 import path from 'path';
 
-import { OFFICIAL, SourceName } from '../common/sources';
+import { OFFICIAL, type SourceName } from '../common/sources';
 import argv from './argv';
 
 const appsRootDir =

@@ -5,7 +5,7 @@
  */
 
 import { inMain } from '../../../ipc/jlink';
-import { AppThunk } from '../../store';
+import { type AppThunk } from '../../store';
 import { updateAvailable } from './jlinkUpdateSlice';
 
 export const checkForJLinkUpdate =

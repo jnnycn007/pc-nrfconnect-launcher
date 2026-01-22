@@ -5,18 +5,18 @@
  */
 
 import {
-    NrfutilModuleName,
-    NrfutilModules,
-    NrfutilModuleVersion,
+    type NrfutilModuleName,
+    type NrfutilModules,
+    type NrfutilModuleVersion,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import {
     NrfutilSandbox,
-    Progress,
+    type Progress,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil';
 import { setNrfutilLogger } from '@nordicsemiconductor/pc-nrfconnect-shared/nrfutil/nrfutilLogger';
 
 import { inRenderer as appInstallProgress } from '../ipc/appInstallProgress';
-import { AppSpec } from '../ipc/apps';
+import { type AppSpec } from '../ipc/apps';
 import { getUserDataPath } from './config';
 import { logger } from './log';
 

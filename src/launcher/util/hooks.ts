@@ -4,7 +4,11 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import {
+    type TypedUseSelectorHook,
+    useDispatch,
+    useSelector,
+} from 'react-redux';
 
 import type { AppDispatch, RootState } from '../store';
 

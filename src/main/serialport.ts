@@ -5,7 +5,7 @@
  */
 
 import {
-    OverwriteOptions,
+    type OverwriteOptions,
     serialPort,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import type {
@@ -13,10 +13,10 @@ import type {
     SetOptions,
     UpdateOptions,
 } from '@serialport/bindings-cpp';
-import { SerialPort, SerialPortOpenOptions } from 'serialport';
+import { SerialPort, type SerialPortOpenOptions } from 'serialport';
 
 import { logger } from './log';
-import { OpenPort, Renderer, serialPorts } from './serialportMap';
+import { type OpenPort, type Renderer, serialPorts } from './serialportMap';
 
 enum ErrorId {
     PORT_IS_ALREADY_BEING_OPENED = 'PORT_IS_ALREADY_BEING_OPENED',

@@ -5,16 +5,16 @@
  */
 
 import {
-    OpenAppOptions,
+    type OpenAppOptions,
     registerLauncherWindowFromMain,
     removeLauncherWindowFromMain,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import {
     app as electronApp,
     BrowserWindow,
-    Rectangle,
+    type Rectangle,
     screen,
-    WebContents,
+    type WebContents,
 } from 'electron';
 import { join } from 'path';
 
@@ -25,11 +25,11 @@ import {
 } from '../common/persistedStore';
 import { LOCAL } from '../common/sources';
 import {
-    AppSpec,
+    type AppSpec,
     hasFixedSize,
     isInstalled,
     isQuickStartApp,
-    LaunchableApp,
+    type LaunchableApp,
 } from '../ipc/apps';
 import { getDownloadableApps, getLocalApps } from './apps/apps';
 import argv, { appArguments, mergeAppArguments } from './argv';

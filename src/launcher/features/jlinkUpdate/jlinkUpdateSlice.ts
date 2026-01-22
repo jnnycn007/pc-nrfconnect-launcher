@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { JLinkUpdate } from '@nordicsemiconductor/nrf-jlink-js';
+import { type JLinkUpdate } from '@nordicsemiconductor/nrf-jlink-js';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 

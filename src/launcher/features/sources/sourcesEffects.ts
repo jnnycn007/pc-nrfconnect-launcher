@@ -5,19 +5,19 @@
  */
 
 import { ErrorDialogActions } from '@nordicsemiconductor/pc-nrfconnect-shared';
-import { AnyAction } from 'redux';
+import { type AnyAction } from 'redux';
 
 import { needsAuthentication } from '../../../common/artifactoryUrl';
 import cleanIpcErrorMessage from '../../../common/cleanIpcErrorMessage';
 import { isLegacyUrl } from '../../../common/legacySource';
 import {
     OFFICIAL,
-    Source,
-    SourceName,
-    SourceUrl,
-    SourceWithError,
+    type Source,
+    type SourceName,
+    type SourceUrl,
+    type SourceWithError,
 } from '../../../common/sources';
-import { AddSourceError, inMain as sources } from '../../../ipc/sources';
+import { type AddSourceError, inMain as sources } from '../../../ipc/sources';
 import type { AppThunk } from '../../store';
 import { addDownloadableApps, removeAppsOfSource } from '../apps/appsSlice';
 import { hideSource, showSource } from '../filter/filterSlice';

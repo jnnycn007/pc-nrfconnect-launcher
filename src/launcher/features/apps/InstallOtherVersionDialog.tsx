@@ -11,7 +11,7 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { rsort } from 'semver';
 
-import { DownloadableApp } from '../../../ipc/apps';
+import { type DownloadableApp } from '../../../ipc/apps';
 import { useLauncherDispatch, useLauncherSelector } from '../../util/hooks';
 import {
     getInstallOtherVersionDialog,

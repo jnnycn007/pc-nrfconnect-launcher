@@ -7,7 +7,7 @@
  */
 
 import { node as nodeVersion } from '@nordicsemiconductor/pc-nrfconnect-shared/scripts/versions';
-import esbuild, { BuildOptions } from 'esbuild';
+import esbuild, { type BuildOptions } from 'esbuild';
 import * as fs from 'node:fs';
 
 import { dependencies } from '../package.json';

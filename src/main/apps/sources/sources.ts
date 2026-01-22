@@ -11,9 +11,9 @@ import { needsAuthentication } from '../../../common/artifactoryUrl';
 import {
     isDeprecatedSource,
     OFFICIAL,
-    Source,
-    SourceName,
-    SourceWithError,
+    type Source,
+    type SourceName,
+    type SourceWithError,
 } from '../../../common/sources';
 import { retrieveToken } from '../../artifactoryTokenStorage';
 import {

@@ -14,7 +14,7 @@ import { isInstalled, isUpdatable, isWithdrawn } from '../../../../ipc/apps';
 import formatPublishTimestamp from '../../../util/formatTimestamp';
 import Col from '../../layout/Col';
 import Row from '../../layout/Row';
-import { DisplayedApp } from '../appsSlice';
+import { type DisplayedApp } from '../appsSlice';
 import AppIcon from './AppIcon';
 import AppProgress from './AppProgress';
 import CreateShortcut from './CreateShortcut';

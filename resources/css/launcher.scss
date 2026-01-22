@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+@use "sass:color";
 
 $enable-transitions: false;
 $enable-rounded: false;
@@ -183,7 +184,7 @@ body {
 
 .text-muted-more {
     @extend .text-muted;
-    color: lighten($color: $text-muted, $amount: 30%) !important;
+    color: color.adjust($text-muted, $lightness: 30%) !important;
 }
 
 .dropdown-menu:empty {

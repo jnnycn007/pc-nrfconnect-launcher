@@ -23,7 +23,7 @@ import {
     isDownloadable,
     isInstalled,
     isWithdrawn,
-    LaunchableApp,
+    type LaunchableApp,
 } from '../../ipc/apps';
 import minimalRequiredAppVersions from './minimalRequiredAppVersions';
 

@@ -6,7 +6,7 @@
 
 import path from 'path';
 
-import { LaunchableApp } from '../ipc/apps';
+import { type LaunchableApp } from '../ipc/apps';
 import { getBundledResourcePath } from './config';
 import { ifExists } from './fileUtil';
 

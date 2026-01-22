@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-import { ElectronApplication } from 'playwright';
+import { type ElectronApplication } from 'playwright';
 
 const sleep = (millis: number) =>
     new Promise(resolve => {

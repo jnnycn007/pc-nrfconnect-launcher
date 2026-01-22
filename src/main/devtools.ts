@@ -9,7 +9,6 @@ import type { REDUX_DEVTOOLS } from 'electron-devtools-installer';
 import installExtension from 'electron-devtools-installer';
 import fs from 'fs';
 import path from 'path';
-import { exit } from 'process';
 
 import argv from './argv';
 
@@ -29,7 +28,7 @@ const installDevtools = async (extensions: Extensions) => {
         app.quit();
     } catch (err) {
         console.log('An error occurred while adding the devtools: ', err);
-        exit(1);
+        process.exit(1);
     }
 };
 
@@ -49,10 +48,10 @@ const removeDevtools = (extensions: Extensions) => {
             }
         });
         console.log('Devtool extensions should be removed now');
-        exit(0);
+        process.exit(0);
     } catch (err) {
         console.log('An error occurred while removing devtools: ', err);
-        exit(1);
+        process.exit(1);
     }
 };
 
@@ -70,7 +69,7 @@ const loadInstalledDevtools = (extensions: Extensions) => {
             'An error occurred while loading installed devtools: ',
             err,
         );
-        exit(1);
+        process.exit(1);
     }
 };
 

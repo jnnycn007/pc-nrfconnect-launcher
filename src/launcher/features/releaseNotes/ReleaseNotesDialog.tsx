@@ -12,13 +12,13 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import {
-    App,
-    InstalledDownloadableApp,
+    type App,
+    type InstalledDownloadableApp,
     isDownloadable,
     isInstalled,
     isUpdatable,
     isWithdrawn,
-    UninstalledDownloadableApp,
+    type UninstalledDownloadableApp,
 } from '../../../ipc/apps';
 import { useLauncherDispatch, useLauncherSelector } from '../../util/hooks';
 import { updateDownloadableApp } from '../apps/appsEffects';
