@@ -12,7 +12,9 @@ import * as launcherUpdateProgress from '../../ipc/launcherUpdateProgress';
 import * as proxyLogin from '../../ipc/proxyLogin';
 import * as showErrorDialog from '../../ipc/showErrorDialog';
 import {
+    addDownloadableApps,
     initialiseAppInstallProgress,
+    resetAppInstallProgress,
     updateAppInstallProgress,
 } from '../features/apps/appsSlice';
 import { updateProgress as updateJLinkProgress } from '../features/jlinkUpdate/jlinkUpdateSlice';
@@ -30,6 +32,10 @@ export default (dispatch: AppDispatch) => {
     });
     appInstallProgress.forMain.registerAppInstallStart((app, fractionNames) => {
         dispatch(initialiseAppInstallProgress({ app, fractionNames }));
+    });
+    appInstallProgress.forMain.registerAppInstallSuccess(app => {
+        dispatch(addDownloadableApps([app]));
+        dispatch(resetAppInstallProgress(app));
     });
 
     showErrorDialog.forMain.registerShowErrorDialog(errorMessage => {

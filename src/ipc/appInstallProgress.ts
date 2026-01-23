@@ -9,11 +9,12 @@ import {
     send,
 } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/infrastructure/mainToRenderer';
 
-import { type AppSpec } from './apps';
+import type { AppSpec, DownloadableApp } from './apps';
 
 const channel = {
     start: 'app-install:start',
     progress: 'app-install:progress',
+    success: 'app-install:success',
 };
 
 // Start
@@ -34,5 +35,18 @@ type DownloadProgress = (progress: Progress) => void;
 const reportAppInstallProgress = send<DownloadProgress>(channel.progress);
 const registerAppInstallProgress = on<DownloadProgress>(channel.progress);
 
-export const forMain = { registerAppInstallStart, registerAppInstallProgress };
-export const inRenderer = { reportAppInstallStart, reportAppInstallProgress };
+type AppInstallSuccess = (app: DownloadableApp) => void;
+
+const reportAppInstallSuccess = send<AppInstallSuccess>(channel.success);
+const registerAppInstallSuccess = on<AppInstallSuccess>(channel.success);
+
+export const forMain = {
+    registerAppInstallStart,
+    registerAppInstallProgress,
+    registerAppInstallSuccess,
+};
+export const inRenderer = {
+    reportAppInstallStart,
+    reportAppInstallProgress,
+    reportAppInstallSuccess,
+};

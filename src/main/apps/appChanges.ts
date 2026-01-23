@@ -280,7 +280,7 @@ const addInstallMetaData = (
 export const installDownloadableApp = async (
     app: DownloadableApp,
     version?: string,
-): Promise<DownloadableApp> => {
+) => {
     const { packageFilePath, checksum, publishTimestamp } = await download(
         app,
         version,
@@ -297,10 +297,14 @@ export const installDownloadableApp = async (
         publishTimestamp,
     );
 
-    return addInstalledAppData(
+    const installedApp = addInstalledAppData(
         // @ts-expect-error -- Because the property `installed` was added above it must be there, I just do not know yet how to convince TypeScript of that
         addDownloadAppData(app.source)(readAppInfo(app)),
     );
+
+    appInstallProgress.reportAppInstallSuccess(installedApp);
+
+    return installedApp;
 };
 
 export const installDownloadableAppCore = async (
