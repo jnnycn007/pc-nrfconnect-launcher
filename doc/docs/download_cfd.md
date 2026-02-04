@@ -51,7 +51,7 @@ Make sure you meet the following requirements for your operating system:
         ```
 
         !!! info "Tip"
-             You can also check the installation rules for nrf-udev by running `nrfutil device --help-install-udev-rules` after you have [installed the device command](./installing_commands.md).
+             You can also check the installation rules for nrf-udev by running `nrfutil device --help-install-udev-rules` after you have [installed the device command](https://docs.nordicsemi.com/bundle/nrfutil/page/guides/installing_commands.html).
 
     - **libfuse2** - Required for Ubuntu v22.04 and above to run `AppImage` applications.
       You can install it with the following command:
