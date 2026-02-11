@@ -22,7 +22,7 @@ import {
     getLastWindowState,
     setLastWindowState,
     windowSizeLauncherKey,
-    WindowState,
+    type WindowState,
 } from '../common/persistedStore';
 import { LOCAL } from '../common/sources';
 import {
