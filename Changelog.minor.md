@@ -54,6 +54,8 @@ release the new version.
 
 ### Fixed
 
+- #1251: Installing apps with `apps:install-downloadable-app` now always updates
+  the UI on success.
 - #1116: Opening some files, e.g. log files, failed. E.g. on Windows and Linux
   with a space or on macOS with a semicolon in their names.
 - #1120: App windows used to increase in size on every launch.

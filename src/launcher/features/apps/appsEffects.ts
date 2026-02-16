@@ -145,13 +145,9 @@ export const installLocalApp =
 
 const install =
     (app: DownloadableApp, version?: string): AppThunk =>
-    async dispatch => {
+    dispatch => {
         try {
-            const installedApp = await appsInMain.installDownloadableApp(
-                app,
-                version,
-            );
-            dispatch(addDownloadableApps([installedApp]));
+            appsInMain.installDownloadableApp(app, version);
         } catch (error) {
             dispatch(
                 ErrorDialogActions.showDialog(
@@ -160,8 +156,8 @@ const install =
                     cleanIpcErrorMessage(describeError(error)),
                 ),
             );
+            dispatch(resetAppInstallProgress(app));
         }
-        dispatch(resetAppInstallProgress(app));
     };
 
 export const installDownloadableApp =
