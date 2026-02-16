@@ -12,7 +12,6 @@ import {
 import {
     app as electronApp,
     BrowserWindow,
-    type Rectangle,
     screen,
     type WebContents,
 } from 'electron';
@@ -22,6 +21,8 @@ import packageJson from '../../package.json';
 import {
     getLastWindowState,
     setLastWindowState,
+    windowSizeLauncherKey,
+    type WindowState,
 } from '../common/persistedStore';
 import { LOCAL } from '../common/sources';
 import {
@@ -52,13 +53,59 @@ export const openLauncherWindow = () => {
     }
 };
 
+const keepPositionWithinBounds = ({ x, y, height, width }: WindowState) => {
+    if (x && y) {
+        const { bounds } = screen.getDisplayMatching({
+            x,
+            y,
+            width,
+            height,
+        });
+        const left = Math.max(x, bounds.x);
+        const top = Math.max(y, bounds.y);
+        const right = Math.min(x + width, bounds.x + bounds.width);
+        const bottom = Math.min(y + height, bounds.y + bounds.height);
+        if (left > right || top > bottom) {
+            // the window would be off screen
+            return {};
+        }
+    }
+
+    return { x, y };
+};
+
+const maximizeWindow = (window: BrowserWindow) => {
+    window.webContents.on('did-finish-load', () => {
+        window.maximize();
+    });
+};
+
+const storeWindowPositionOnClose = (window: BrowserWindow, appName: string) => {
+    window.on('close', () => {
+        const bounds = window.getBounds();
+        setLastWindowState(appName, {
+            x: bounds.x,
+            y: bounds.y,
+            width: bounds.width,
+            height: bounds.height,
+            maximized: window.isMaximized(),
+        });
+    });
+};
+
 const createLauncherWindow = () => {
+    const lastWindowState = getLastWindowState(windowSizeLauncherKey);
+
+    const { x, y } = keepPositionWithinBounds(lastWindowState);
+    const { width, height } = lastWindowState;
     const window = createWindow({
         title: `nRF Connect for Desktop v${packageJson.version}`,
         url: `file://${getBundledResourcePath()}/launcher.html`,
         icon: getNrfConnectForDesktopIcon(),
-        width: 760,
-        height: 600,
+        x,
+        y,
+        width,
+        height,
         minHeight: 500,
         minWidth: 600,
         center: true,
@@ -66,6 +113,10 @@ const createLauncherWindow = () => {
     });
 
     registerLauncherWindowFromMain(window);
+
+    if (lastWindowState.maximized) maximizeWindow(window);
+
+    storeWindowPositionOnClose(window, windowSizeLauncherKey);
 
     window.on('close', event => {
         if (appWindows.length > 0) {
@@ -105,25 +156,10 @@ const getSizeOptions = (app: LaunchableApp) => {
         };
     }
 
-    const lastWindowState = getLastWindowState();
+    const lastWindowState = getLastWindowState(app.name);
 
-    let { x, y } = lastWindowState;
+    const { x, y } = keepPositionWithinBounds(lastWindowState);
     const { width, height } = lastWindowState;
-
-    if (x && y) {
-        const { bounds } = screen.getDisplayMatching(
-            lastWindowState as Rectangle,
-        );
-        const left = Math.max(x, bounds.x);
-        const top = Math.max(y, bounds.y);
-        const right = Math.min(x + width, bounds.x + bounds.width);
-        const bottom = Math.min(y + height, bounds.y + bounds.height);
-        if (left > right || top > bottom) {
-            // the window would be off screen, let's open it where the launcher is
-            x = undefined;
-            y = undefined;
-        }
-    }
 
     return {
         x,
@@ -163,22 +199,10 @@ export const openAppWindow = (app: LaunchableApp, args: string[]) => {
     });
 
     if (!isQuickStartApp(app)) {
-        appWindow.webContents.on('did-finish-load', () => {
-            if (getLastWindowState().maximized) {
-                appWindow.maximize();
-            }
-        });
+        const isMaximized = getLastWindowState(app.name).maximized;
+        if (isMaximized) maximizeWindow(appWindow);
 
-        appWindow.on('close', () => {
-            const bounds = appWindow.getBounds();
-            setLastWindowState({
-                x: bounds.x,
-                y: bounds.y,
-                width: bounds.width,
-                height: bounds.height,
-                maximized: appWindow.isMaximized(),
-            });
-        });
+        storeWindowPositionOnClose(appWindow, app.name);
     }
 
     let reloading = false;

@@ -10,7 +10,7 @@ import packageJson from '../../package.json';
 import type { TokenInformation } from '../ipc/artifactoryToken';
 import type { SourceName } from './sources';
 
-type WindowState = {
+export type WindowState = {
     x?: number;
     y?: number;
     width: number;
@@ -26,7 +26,7 @@ export type ShownStates = {
 interface Schema {
     lastBundledAppInstalledVersion: string;
     isQuickStartInfoShownBefore: boolean;
-    lastWindowState: WindowState;
+    [lastWindowState: `lastWindowState.${string}`]: WindowState;
     updateCheck: {
         doOnStartup: boolean;
         lastUpdate?: Date;
@@ -49,15 +49,30 @@ const store = new Store<Schema>();
 
 export const resetStore = () => store.clear();
 
-const defaultWindowSize = {
+export const windowSizeLauncherKey = 'Launcher';
+const defaultAppWindowSize = {
     width: 1024,
     height: 800,
     maximized: false,
 };
-export const getLastWindowState = () =>
-    store.get('lastWindowState', defaultWindowSize);
-export const setLastWindowState = (lastWindowState: WindowState) =>
-    store.set('lastWindowState', lastWindowState);
+const defaultLauncherWindowSize = {
+    width: 760,
+    height: 600,
+    maximized: false,
+};
+
+export const getLastWindowStateLegacy = (app: string) => {
+    if (app === windowSizeLauncherKey) {
+        return defaultLauncherWindowSize;
+    }
+    // Use old 'lastWindowState' as backup for some versions so people don't suddenly jump to non-persisted size
+    return store.get('lastWindowState', defaultAppWindowSize);
+};
+
+export const getLastWindowState = (app: string) =>
+    store.get(`lastWindowState.${app}`, getLastWindowStateLegacy(app));
+export const setLastWindowState = (app: string, lastWindowState: WindowState) =>
+    store.set(`lastWindowState.${app}`, lastWindowState);
 
 export const getCheckForUpdatesAtStartup = () =>
     store.get('updateCheck')?.doOnStartup ?? true;
