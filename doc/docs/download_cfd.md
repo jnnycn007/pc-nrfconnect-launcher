@@ -24,10 +24,10 @@ All nRF Connect for Desktop applications require the launcher v4.1.0 or later.
 
 nRF Connect for Desktop has the following additional requirements:
 
-| Operating system | Prerequisite | Version required and description |
-|------------------|-------------|-------------|
-| All | [**SEGGER J-Link**](https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack) | The latest version tested and recommended by Nordic Semiconductor. nRF Connect for Desktop will notify you about installing the correct J-Link version when you run the launcher. |
-| Windows | SEGGER USB Driver for J-Link | Required for support of older Nordic Semiconductor devices. For information on how to install the USB Driver, see the [nRF Util prerequisites](https://docs.nordicsemi.com/bundle/nrfutil/page/guides/installing.html#prerequisites) documentation. |
+| Operating system | Prerequisite | Description |
+|------------------|--------------|-------------|
+| All | [SEGGER J-Link](https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack) | The latest version tested and recommended by Nordic Semiconductor. nRF Connect for Desktop will notify you about installing the correct J-Link version when you run the launcher. |
+| Windows | SEGGER USB Driver for J-Link | Required for support of older Nordic Semiconductor devices. When you install SEGGER J-Link through nRF Connect for Desktop, the driver is automatically installed. For information on how to install the USB Driver manually, see the [nRF Util prerequisites](https://docs.nordicsemi.com/bundle/nrfutil/page/guides/installing.html#prerequisites) documentation. |
 | Linux | [nrf-udev](https://github.com/NordicSemiconductor/nrf-udev) | Module with udev rules required to access USB ports on Nordic Semiconductor devices and program the firmware. Download the latest DEB file from [nrf-udev](https://github.com/NordicSemiconductor/nrf-udev) and run `sudo dpkg -i nrf-udev_1.0.1-all.deb` to install it.  |
 | Linux | **libusb-1.0-0** | Usually comes installed with Ubuntu. You can run `sudo apt install libusb-1.0-0` to install it.  |
 | Linux | **libfuse2** | Required for Ubuntu v22.04 and above to run `AppImage` applications. You can run `sudo add-apt-repository universe && sudo apt-get update && sudo apt install libfuse2` to install it.  |
