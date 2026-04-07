@@ -17,7 +17,7 @@ export default () =>
                 <a
                     target="_blank"
                     rel="noreferrer noopener"
-                    href="https://github.com/NordicSemiconductor/pc-nrfconnect-launcher/releases/latest"
+                    href="https://github.com/nordicsemi/pc-nrfconnect-launcher/releases/latest"
                     className="tw-preflight tw-text-white tw-underline"
                 >
                     available for download

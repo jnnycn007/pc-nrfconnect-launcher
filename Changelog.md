@@ -452,7 +452,7 @@ This version is released only for macOS.
 ### Changed
 
 - Updated pc-ble-driver-js to 2.7.2 See changes
-  https://github.com/NordicSemiconductor/pc-ble-driver-js/releases/tag/v2.7.2
+  https://github.com/nordicsemi/pc-ble-driver-js/releases/tag/v2.7.2
 
 ### Fixed
 
@@ -622,7 +622,7 @@ This version is released only for macOS.
 ### Changed
 
 - Updated pc-ble-driver-js to 2.4.2 #254 See changes for v2.4.2
-  https://github.com/NordicSemiconductor/pc-ble-driver-js/releases
+  https://github.com/nordicsemi/pc-ble-driver-js/releases
 - Updated electron to 2.0 #252
 - Updated jest to 23.4.1 #248 #249 #250
 - Updated nrf-device-setup-js to 0.3.0 to support bootloader update #247
@@ -640,7 +640,7 @@ This version is released only for macOS.
 
 - Added support for nRF52840 dongle #204, #219, #220
 - Updated pc-ble-driver-js to 2.4.1 #214 See changes for v2.4.0 and v2.4.1
-  https://github.com/NordicSemiconductor/pc-ble-driver-js/releases
+  https://github.com/nordicsemi/pc-ble-driver-js/releases
 - Added support for generic (jprog/dfu) device setup by nrf-device-setup module
 - Upgraded to Electron v1.8 #203
 - Added API documentation of using the new DeviceSelector and device setup
@@ -679,9 +679,9 @@ Pre-release with Linux AppImage.
   exists (#143)
 - Using separate log and data directories for apps (#139)
 - Upgraded to pc-nrfjprog-js v1.2.0
-  (https://github.com/NordicSemiconductor/pc-nrfjprog-js/releases/tag/v1.2.0)
+  (https://github.com/nordicsemi/pc-nrfjprog-js/releases/tag/v1.2.0)
 - Upgraded to pc-ble-driver-js v2.3.0
-  (https://github.com/NordicSemiconductor/pc-ble-driver-js/releases/tag/v2.3.0)
+  (https://github.com/nordicsemi/pc-ble-driver-js/releases/tag/v2.3.0)
 
 ### Fixed
 
@@ -705,9 +705,9 @@ Pre-release with handling of edge cases in J-Link serial number lookup (#145).
 
 - Improve JLink serial number lookup time on Windows (#135)
 - pc-ble-driver-js: Increase retransmission interval to give the peer more time
-  to repond (https://github.com/NordicSemiconductor/pc-ble-driver-js/pull/99)
+  to repond (https://github.com/nordicsemi/pc-ble-driver-js/pull/99)
 - pc-ble-driver-js: Emit debug message instead of error for unsupported devkits
-  (https://github.com/NordicSemiconductor/pc-ble-driver-js/pull/95)
+  (https://github.com/nordicsemi/pc-ble-driver-js/pull/95)
 
 ## 2.2.0
 
@@ -716,7 +716,7 @@ Pre-release with handling of edge cases in J-Link serial number lookup (#145).
 - Allow creating desktop shortcuts for installed apps (#118, #120, #124)
 - Upgrade to pc-nrfjprog-js v1.1.0 and nRF5x-Command-Line-Tools v9.7.1 (#134)
 - Upgrade to pc-ble-driver-js v2.1.0
-  (https://github.com/NordicSemiconductor/pc-ble-driver-js/releases/tag/v2.1.0)
+  (https://github.com/nordicsemi/pc-ble-driver-js/releases/tag/v2.1.0)
 
 ### Fixed
 
@@ -747,15 +747,15 @@ Pre-release with improved support for proxies, ref. #104.
 While nRF Connect for Desktop v1 was a dedicated Bluetooth low energy tool, v2
 is a framework that can launch multiple desktop apps. The Bluetooth low energy
 tool has been
-[rewritten as an app](https://github.com/NordicSemiconductor/pc-nrfconnect-ble)
-for the nRF Connect for Desktop framework, and can be installed and launched
-through the nRF Connect for Desktop UI.
+[rewritten as an app](https://github.com/nordicsemi/pc-nrfconnect-ble) for the
+nRF Connect for Desktop framework, and can be installed and launched through the
+nRF Connect for Desktop UI.
 
 ### Changed
 
 - Allows users to easily install, update, and launch apps
 - Allows developers to
-  [create new apps](https://nordicsemiconductor.github.io/pc-nrfconnect-docs/create_new_app)
+  [create new apps](https://nordicsemi.github.io/pc-nrfconnect-docs/create_new_app)
 - Supports Windows, macOS, and Linux
 - Automatic updates for Windows and macOS
 

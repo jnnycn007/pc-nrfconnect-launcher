@@ -30,8 +30,7 @@ const officialSource = {
             displayName: 'RSSI Viewer',
             description:
                 'Live visualization of RSSI per frequency for nRF52832',
-            homepage:
-                'https://github.com/NordicSemiconductor/pc-nrfconnect-rssi',
+            homepage: 'https://github.com/nordicsemi/pc-nrfconnect-rssi',
             url: 'https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-rssi',
         },
         'pc-nrfconnect-ppk': {
@@ -59,11 +58,10 @@ const officialSource = {
             displayName: 'RSSI Viewer',
             description:
                 'Live visualization of RSSI per frequency for nRF52832',
-            homepage:
-                'https://github.com/NordicSemiconductor/pc-nrfconnect-rssi',
+            homepage: 'https://github.com/nordicsemi/pc-nrfconnect-rssi',
             repository: {
                 type: 'git',
-                url: 'https://github.com/NordicSemiconductor/pc-nrfconnect-rssi.git',
+                url: 'https://github.com/nordicsemi/pc-nrfconnect-rssi.git',
             },
             engines: {
                 nrfconnect: '>=4.2.0',
@@ -80,8 +78,7 @@ const officialSource = {
             displayName: 'RSSI Viewer',
             description:
                 'Live visualization of RSSI per frequency for nRF52832',
-            homepage:
-                'https://github.com/NordicSemiconductor/pc-nrfconnect-rssi',
+            homepage: 'https://github.com/nordicsemi/pc-nrfconnect-rssi',
             iconUrl:
                 'https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/pc-nrfconnect-rssi.svg',
             releaseNotesUrl:
@@ -134,8 +131,7 @@ const releaseTestSource = {
         'pc-nrfconnect-linkmonitor': {
             displayName: 'LTE Link Monitor',
             description: 'Link monitor and AT command terminal',
-            homepage:
-                'https://github.com/NordicSemiconductor/pc-nrfconnect-linkmonitor',
+            homepage: 'https://github.com/nordicsemi/pc-nrfconnect-linkmonitor',
             url: 'https://developer.nordicsemi.com/.pc-tools/nrfconnect-apps/release-test/pc-nrfconnect-linkmonitor',
         },
     },

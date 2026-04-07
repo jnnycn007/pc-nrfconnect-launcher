@@ -24,7 +24,7 @@ jobs:
                       exit 1
                   fi
 
-                  if ! gh release view "$TAG" --repo nordicsemiconductor/pc-nrfconnect-launcher >/dev/null 2>&1; then
+                  if ! gh release view "$TAG" --repo nordicsemi/pc-nrfconnect-launcher >/dev/null 2>&1; then
                       echo "::error::Not running because there is no GitHub release with the tag $TAG prepared yet"
                       exit 1
                   fi

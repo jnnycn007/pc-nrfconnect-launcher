@@ -126,11 +126,11 @@ release the new version.
 
 - #914: Show the devices actually supported by the current Quick Start app.
 - #935: Updated and corrected dialog styles from
-  [shared v146](https://github.com/NordicSemiconductor/pc-nrfconnect-shared/releases/tag/v146).
+  [shared v146](https://github.com/nordicsemi/pc-nrfconnect-shared/releases/tag/v146).
 - #935: Better message when installing downloadable apps fails.
 - #937: No quirky error message when invoking `nrfutil` fails in strange ways
   (from from
-  [shared v150](https://github.com/NordicSemiconductor/pc-nrfconnect-shared/releases/tag/v150)).
+  [shared v150](https://github.com/nordicsemi/pc-nrfconnect-shared/releases/tag/v150)).
 - #937: No error message on shutdown when e.g. an ongoing download still wants
   to send IPC messages.
 - #926, #931, #940, #946, #955: Switch from Azure to GitHub Actions.

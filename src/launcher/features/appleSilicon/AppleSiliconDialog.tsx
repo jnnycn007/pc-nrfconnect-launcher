@@ -43,7 +43,7 @@ export default () => {
                         variant="primary"
                         onClick={() => {
                             openWindow.openUrl(
-                                'https://github.com/NordicSemiconductor/pc-nrfconnect-launcher/releases/latest',
+                                'https://github.com/nordicsemi/pc-nrfconnect-launcher/releases/latest',
                             );
                             dispatch(download());
                         }}
@@ -65,7 +65,7 @@ export default () => {
                     Silicon.{' '}
                     <ExternalLink
                         label="Download the latest version of the launcher"
-                        href="https://github.com/NordicSemiconductor/pc-nrfconnect-launcher/releases/latest"
+                        href="https://github.com/nordicsemi/pc-nrfconnect-launcher/releases/latest"
                     />
                     . This is the only supported way to use nRF Connect for
                     Desktop on Apple Silicon machines.

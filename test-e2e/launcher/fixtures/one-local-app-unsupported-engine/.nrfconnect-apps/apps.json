@@ -2,11 +2,11 @@
     "pc-nrfconnect-ble": {
         "displayName": "Bluetooth Low Energy",
         "description": "General tool for development and testing with Bluetooth Low Energy",
-        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-ble"
+        "homepage": "https://github.com/nordicsemi/pc-nrfconnect-ble"
     },
     "pc-nrfconnect-rssi": {
         "displayName": "RSSI Viewer",
         "description": "Live visualization of RSSI per frequency for nRF52832",
-        "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-rssi"
+        "homepage": "https://github.com/nordicsemi/pc-nrfconnect-rssi"
     }
 }

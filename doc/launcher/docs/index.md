@@ -8,7 +8,7 @@ See [nRF Connect for Desktop requirements and installation](https://docs.nordics
 
 ## Application source code
 
-The code of the application is open source and [available on GitHub](https://github.com/NordicSemiconductor/pc-nrfconnect-launcher).
+The code of the application is open source and [available on GitHub](https://github.com/nordicsemi/pc-nrfconnect-launcher).
 Feel free to fork the repository and clone it for secondary development or feature contributions.
 
 ## Reporting issues
