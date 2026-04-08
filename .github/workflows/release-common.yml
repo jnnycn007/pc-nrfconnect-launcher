@@ -68,7 +68,7 @@ jobs:
               env:
                   GH_TOKEN: ${{ github.token }}
               run: |
-                  gh run download --repo nordicsemiconductor/pc-nrfconnect-launcher
+                  gh run download --repo nordicsemi/pc-nrfconnect-launcher
 
             - name: Merge *-mac.yml
               run: |
@@ -92,7 +92,7 @@ jobs:
                   GH_TOKEN: ${{ github.token }}
               run: |
                   gh release create "$TAG" \
-                    --repo nordicsemiconductor/pc-nrfconnect-launcher \
+                    --repo nordicsemi/pc-nrfconnect-launcher \
                     --draft \
                     --title "$TAG" \
                     --notes-file "$TAG/changelog.md" \

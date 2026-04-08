@@ -3,7 +3,7 @@ processes.
 
 It is similar to `ipc/` in shared and also uses code from there, so also look at
 the documentation of that folder, esp. regarding the code conventions:
-https://github.com/NordicSemiconductor/pc-nrfconnect-shared/blob/main/ipc/README.md
+https://github.com/nordicsemi/pc-nrfconnect-shared/blob/main/ipc/README.md
 
 Some of the code here should be called from the main process, usually to
 register IPC handlers. Other code here should be called from the renderer

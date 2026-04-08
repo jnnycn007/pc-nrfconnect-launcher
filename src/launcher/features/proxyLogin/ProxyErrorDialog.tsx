@@ -34,7 +34,7 @@ export default () => {
                 disable &quot;Check for updates at startup&quot;. Then restart
                 nRF Connect for Desktop and install apps manually by following
                 the instructions at{' '}
-                <ExternalLink href="https://github.com/NordicSemiconductor/pc-nrfconnect-launcher" />
+                <ExternalLink href="https://github.com/nordicsemi/pc-nrfconnect-launcher" />
                 .
             </p>
         </ErrorDialog>

@@ -16,7 +16,7 @@ import { continueUpdateProcess } from '../process/updateProcess';
 import { getLauncherUpdate, reset } from './launcherUpdateSlice';
 
 const releaseNotesUrl =
-    'https://github.com/NordicSemiconductor/pc-nrfconnect-launcher/releases';
+    'https://github.com/nordicsemi/pc-nrfconnect-launcher/releases';
 
 export default () => {
     const dispatch = useLauncherDispatch();

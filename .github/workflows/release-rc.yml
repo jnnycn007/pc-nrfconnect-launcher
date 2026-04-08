@@ -37,7 +37,7 @@ jobs:
                   if [[ "$VERSION" != *-rc* ]]; then
                       echo "# :warning: Not running because $VERSION is not a release candidate" >> $GITHUB_STEP_SUMMARY
                       IS_RC_VERSION=false
-                  elif gh release view "$TAG" --repo nordicsemiconductor/pc-nrfconnect-launcher >/dev/null 2>&1; then
+                  elif gh release view "$TAG" --repo nordicsemi/pc-nrfconnect-launcher >/dev/null 2>&1; then
                       echo "# :warning: Not running because a release with the tag $TAG already exists" >> $GITHUB_STEP_SUMMARY
                       RELEASE_EXISTS=true
                   fi

@@ -50,11 +50,11 @@ exports[`ProxyErrorDialog is displayed after users canceled the login 1`] = `
              
             <a
               class="tw-preflight tw-text-nordicBlue hover:tw-underline"
-              href="https://github.com/NordicSemiconductor/pc-nrfconnect-launcher"
+              href="https://github.com/nordicsemi/pc-nrfconnect-launcher"
               rel="noreferrer noopener"
               target="_blank"
             >
-              https://github.com/NordicSemiconductor/pc-nrfconnect-launcher
+              https://github.com/nordicsemi/pc-nrfconnect-launcher
             </a>
             .
           </p>

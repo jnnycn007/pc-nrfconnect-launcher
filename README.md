@@ -20,8 +20,7 @@ and more.
 
 ## Development
 
-See the
-[app development](https://github.com/NordicSemiconductor/pc-nrfconnect-docs/)
+See the [app development](https://github.com/nordicsemi/pc-nrfconnect-docs/)
 pages for details on how to develop apps for the nRF Connect for Desktop
 framework.
 
@@ -32,7 +31,7 @@ Report issues on the [DevZone](https://devzone.nordicsemi.com) portal.
 ## Contributing
 
 See the
-[infos on contributing](https://nordicsemiconductor.github.io/pc-nrfconnect-docs/contributing)
+[infos on contributing](https://nordicsemi.github.io/pc-nrfconnect-docs/contributing)
 for details.
 
 ## License
