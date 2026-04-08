@@ -66,10 +66,3 @@ jobs:
               run: |
                   jf rt copy --flat "swtools/external/ncd/launcher/$TAG/" web-assets-com_nordicsemi/external/swtools/ncd/launcher/$TAG/
                   jf rt copy --flat "swtools/external/ncd/launcher/latest*" web-assets-com_nordicsemi/external/swtools/ncd/launcher/
-
-    publish-docs:
-        uses: ./.github/workflows/docs-publish-prod.yml
-        with:
-            ref: ${{ inputs.tag }}
-        needs: continue-release
-        secrets: inherit
