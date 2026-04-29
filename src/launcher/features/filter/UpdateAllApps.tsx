@@ -9,21 +9,29 @@ import Button from 'react-bootstrap/Button';
 
 import { useLauncherDispatch, useLauncherSelector } from '../../util/hooks';
 import { updateDownloadableApp } from '../apps/appsEffects';
-import { getUpdatableVisibleApps } from '../apps/appsSlice';
+import { getUpdatableVisibleApps, isInProgress } from '../apps/appsSlice';
 
 export default () => {
     const dispatch = useLauncherDispatch();
     const updatableApps = useLauncherSelector(getUpdatableVisibleApps);
 
     const updateAllApps = () =>
-        updatableApps.forEach(app => {
-            dispatch(updateDownloadableApp(app));
-        });
+        updatableApps
+            .filter(app => !isInProgress(app))
+            .forEach(app => {
+                dispatch(updateDownloadableApp(app));
+            });
 
     if (updatableApps.length === 0) return null;
 
+    const areAllUpdatableAppsInProgress = updatableApps.every(isInProgress);
+
     return (
-        <Button variant="outline-secondary" onClick={updateAllApps}>
+        <Button
+            variant="outline-secondary"
+            disabled={areAllUpdatableAppsInProgress}
+            onClick={updateAllApps}
+        >
             Update all apps
         </Button>
     );

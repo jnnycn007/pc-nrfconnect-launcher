@@ -312,12 +312,9 @@ export const getUpdateCheckStatus = (state: RootState) => ({
     lastUpdateCheckDate: state.apps.lastUpdateCheckDate,
 });
 
-export const getUpdatableVisibleApps = (
-    state: RootState,
-): InstalledDownloadableApp[] =>
+export const getUpdatableVisibleApps = (state: RootState) =>
     state.apps.downloadableApps
         .filter(getAppsFilter(state))
-        .map((app: App) => app) // Narrowing the type, so that the final type is just InstalledDownloadableApp[]
         .filter(isUpdatable);
 
 export const isInProgress = (
