@@ -9,6 +9,13 @@ release the new version.
 
 ## Unreleased
 
+### Fixed
+
+- #1276: Button "Update all apps" was not disabled and tried to update apps
+  which are already being updated or removed.
+
+## 5.3.0
+
 ### Added
 
 - #1162: Update bundled J-Link to V9.24a.
