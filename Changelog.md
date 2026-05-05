@@ -1,3 +1,10 @@
+## 5.3.1 - 2026-05-05
+
+### Fixed
+
+- Issues with installation of local apps on Windows using drag and drop.
+- Issues with installation of apps on Ubuntu 26.04 LTS.
+
 ## 5.3.0 - 2026-04-29
 
 ### Added
