@@ -20,7 +20,7 @@ export default () => (
         </Card>
         <Card title="Documentation">
             <Button
-                href="https://docs.nordicsemi.com/bundle/nrf-connect-desktop/page/index.html"
+                href="https://docs.nordicsemi.com/bundle/swtools_docs/page/index.html"
                 target="_blank"
                 variant="outline-primary"
             >
