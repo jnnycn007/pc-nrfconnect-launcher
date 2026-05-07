@@ -62,7 +62,7 @@ export default () => {
                 />
                 . Read{' '}
                 <ExternalLink
-                    href="https://docs.nordicsemi.com/bundle/nrf-connect-desktop/page/working_with_authentications_tokens.html"
+                    href="https://docs.nordicsemi.com/bundle/swtools_docs/page/app/pc-nrfconnect-launcher/working_with_authentications_tokens.html"
                     label="Working with identity tokens"
                 />{' '}
                 for detailed steps.

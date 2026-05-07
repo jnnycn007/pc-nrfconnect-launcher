@@ -13,6 +13,7 @@ release the new version.
 
 - #1276: Button "Update all apps" was not disabled and tried to update apps
   which are already being updated or removed.
+- #1284: Links to outdated documentation bundle.
 
 ## 5.3.0
 
