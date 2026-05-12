@@ -38,19 +38,18 @@ const createChecksumChecker = async fileUrl => {
             const calculatedChecksum = hash.digest('hex');
 
             if (calculatedChecksum !== expectedChecksum) {
-                await unlink(destinationFile);
                 console.log('Calculated checksum:', calculatedChecksum);
                 console.log('Expected checksum:  ', expectedChecksum);
+
+                await unlink(destinationFile);
                 throw new Error('Checksum verification failed.');
             }
         },
     };
 };
 
-module.exports = async (fileUrl, destinationFile, useChecksum = true) => {
-    const checksumChecker = useChecksum
-        ? await createChecksumChecker(fileUrl)
-        : null;
+module.exports = async (fileUrl, destinationFile) => {
+    const checksumChecker = await createChecksumChecker(fileUrl);
 
     console.log('🏎️ Started Download', fileUrl);
     const response = await fetch(fileUrl);
@@ -65,22 +64,12 @@ module.exports = async (fileUrl, destinationFile, useChecksum = true) => {
 
     await mkdir(path.dirname(destinationFile), { recursive: true });
 
-    let pipelineStream = response.body;
-
-    if (checksumChecker != null) {
-        pipelineStream = pipelineStream.pipeThrough(
-            checksumChecker.transformStream(),
-        );
-    }
-
-    await pipelineStream.pipeTo(
-        Writable.toWeb(fs.createWriteStream(destinationFile)),
-    );
+    await response.body
+        .pipeThrough(checksumChecker.transformStream())
+        .pipeTo(Writable.toWeb(fs.createWriteStream(destinationFile)));
 
     console.log('🏁 Finish Download', fileUrl);
     console.log('🏁 Saved to', destinationFile);
 
-    if (checksumChecker != null) {
-        await checksumChecker.verify(destinationFile);
-    }
+    await checksumChecker.verify(destinationFile);
 };
