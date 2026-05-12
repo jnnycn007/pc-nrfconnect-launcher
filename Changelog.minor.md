@@ -18,7 +18,7 @@ release the new version.
   any version (latest = on, other = off)
 - #1311: Feature for updating apps with `auto-update` enabled in package.json.
   The update process triggers when clicking **Open**.
-- #1285: Removed use of axios at build time.
+- #1285: Removed use of axios at build time and now actually checks checksums.
 
 ## 5.3.2
 

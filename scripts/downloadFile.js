@@ -47,7 +47,7 @@ const createChecksumChecker = async fileUrl => {
     };
 };
 
-module.exports = async (fileUrl, destinationFile, useChecksum = false) => {
+module.exports = async (fileUrl, destinationFile, useChecksum = true) => {
     const checksumChecker = useChecksum
         ? await createChecksumChecker(fileUrl)
         : null;

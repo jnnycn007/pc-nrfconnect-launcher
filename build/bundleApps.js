@@ -65,15 +65,14 @@ const parseSourceFile = appUrls =>
             const dstPath = url =>
                 path.join('resources', 'prefetched', path.basename(url));
 
-            await downloadFile(appJSONUrl, dstPath(appJSONUrl), false);
+            await downloadFile(appJSONUrl, dstPath(appJSONUrl));
             const appJSON = JSON.parse(fs.readFileSync(dstPath(appJSONUrl)));
 
             await Promise.all([
-                downloadFile(appJSON.iconUrl, dstPath(appJSON.iconUrl), false),
+                downloadFile(appJSON.iconUrl, dstPath(appJSON.iconUrl)),
                 downloadFile(
                     appJSON.releaseNotesUrl,
                     dstPath(appJSON.releaseNotesUrl),
-                    false,
                 ),
             ]);
 
@@ -96,7 +95,6 @@ const parseSourceFile = appUrls =>
                         appBundlesPath,
                         path.basename(latestVersion.tarballUrl),
                     ),
-                    false,
                 ),
             );
 
@@ -120,7 +118,6 @@ exports.default = async () => {
     await downloadFile(
         SOURCE_URL,
         `resources/prefetched/${path.basename(SOURCE_URL)}`,
-        false,
     );
 
     const appUrls = JSON.parse(
