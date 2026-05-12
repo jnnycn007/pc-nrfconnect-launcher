@@ -9,6 +9,8 @@ release the new version.
 
 ## Unreleased
 
+### Changed
+
 - #1320: Update Electron to v43.
 - #1314: Temporarily force auto-update of the official Quick Start app, to get
   users onto the version with cloud telemetry.
@@ -16,6 +18,7 @@ release the new version.
   any version (latest = on, other = off)
 - #1311: Feature for updating apps with `auto-update` enabled in package.json.
   The update process triggers when clicking **Open**.
+- #1285: Removed use of axios at build time.
 
 ## 5.3.2
 
