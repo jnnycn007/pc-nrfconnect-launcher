@@ -4,8 +4,20 @@
     "labels": ["doc not required", "ui not required"],
     "packageRules": [
         {
-            "enabled": false,
-            "matchPackageNames": ["!@nordicsemiconductor/pc-nrfconnect-shared"]
+            "matchManagers": ["npm"],
+            "matchPackageNames": ["!@nordicsemiconductor/pc-nrfconnect-shared"],
+            "enabled": false
+        },
+        {
+            "matchManagers": ["github-actions"],
+            "enabled": true,
+            "pinDigests": true,
+            "groupName": "GitHub Actions"
+        },
+        {
+            "matchManagers": ["github-actions"],
+            "matchPackageNames": ["nordicsemi/pc-nrfconnect-shared"],
+            "enabled": false
         }
     ]
 }
