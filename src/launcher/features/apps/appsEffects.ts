@@ -144,10 +144,10 @@ export const installLocalApp =
     };
 
 const install =
-    (app: DownloadableApp, version?: string): AppThunk =>
-    dispatch => {
+    (app: DownloadableApp, version?: string): AppThunk<Promise<void>> =>
+    async dispatch => {
         try {
-            appsInMain.installDownloadableApp(app, version);
+            await appsInMain.installDownloadableApp(app, version);
         } catch (error) {
             dispatch(
                 ErrorDialogActions.showDialog(
@@ -178,7 +178,7 @@ export const installDownloadableApp =
     };
 
 export const updateDownloadableApp =
-    (app: DownloadableApp): AppThunk =>
+    (app: DownloadableApp): AppThunk<Promise<void>> =>
     dispatch => {
         telemetry.sendEvent(EventAction.APP_MANAGEMENT, {
             action: 'Update',
