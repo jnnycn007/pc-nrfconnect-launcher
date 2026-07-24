@@ -529,13 +529,6 @@ exports[`AppList should render local, not-installed, installed, and updatable ap
                 class="wide-btns btn-toolbar"
                 role="toolbar"
               >
-                <button
-                  class="btn btn-primary"
-                  title="Open Local Dummy Test App"
-                  type="button"
-                >
-                  Open
-                </button>
                 <div
                   class="dropdown"
                 >
