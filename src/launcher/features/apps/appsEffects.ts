@@ -144,24 +144,35 @@ export const installLocalApp =
     };
 
 const install =
-    (app: DownloadableApp, version?: string): AppThunk<Promise<void>> =>
-    async dispatch => {
+    (
+        app: DownloadableApp,
+        version?: string,
+        showErrorDialog = true,
+    ): AppThunk<Promise<DownloadableApp | undefined>> =>
+    dispatch => {
         try {
-            await appsInMain.installDownloadableApp(app, version);
+            return appsInMain.installDownloadableApp(app, version);
         } catch (error) {
-            dispatch(
-                ErrorDialogActions.showDialog(
-                    `Unable to install downloadable app.`,
-                    undefined,
-                    cleanIpcErrorMessage(describeError(error)),
-                ),
-            );
             dispatch(resetAppInstallProgress(app));
+            if (showErrorDialog) {
+                dispatch(
+                    ErrorDialogActions.showDialog(
+                        `Unable to install downloadable app.`,
+                        undefined,
+                        cleanIpcErrorMessage(describeError(error)),
+                    ),
+                );
+                return Promise.resolve(undefined);
+            }
+            throw cleanIpcErrorMessage(describeError(error));
         }
     };
 
 export const installDownloadableApp =
-    (app: DownloadableApp, toVersion?: string): AppThunk =>
+    (
+        app: DownloadableApp,
+        toVersion?: string,
+    ): AppThunk<Promise<DownloadableApp | undefined>> =>
     dispatch => {
         telemetry.sendEvent(EventAction.APP_MANAGEMENT, {
             action: toVersion == null ? 'Install' : 'Install Explicit Version',
@@ -178,7 +189,10 @@ export const installDownloadableApp =
     };
 
 export const updateDownloadableApp =
-    (app: DownloadableApp): AppThunk<Promise<void>> =>
+    (
+        app: DownloadableApp,
+        showErrorDialog = true,
+    ): AppThunk<Promise<DownloadableApp | undefined>> =>
     dispatch => {
         telemetry.sendEvent(EventAction.APP_MANAGEMENT, {
             action: 'Update',
@@ -191,7 +205,7 @@ export const updateDownloadableApp =
         });
 
         dispatch(updateDownloadableAppStarted(app));
-        return dispatch(install(app));
+        return dispatch(install(app, undefined, showErrorDialog));
     };
 
 export const removeDownloadableApp =
