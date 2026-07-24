@@ -162,28 +162,38 @@ export const downloadLatestAppInfos = async () => {
     };
 };
 
+const downloadAppInfo = async (
+    appUrl: string,
+    source: Source,
+    failSilently = false,
+) => {
+    const appInfo = await downloadToJson<AppInfo>(appUrl);
+
+    if (path.basename(appUrl) !== `${appInfo.name}.json`) {
+        if (!failSilently) {
+            inRenderer.showErrorDialog(
+                `An app is found at \`${appUrl}\` ` +
+                    `using the name \`${appInfo.name}\`, which does ` +
+                    `not match the URL. This app will be ignored.`,
+            );
+        }
+        return undefined;
+    }
+
+    const mergedAppinfo = writeAppInfo(appInfo, source, {
+        keepInstallInfo: true,
+    });
+
+    await downloadAppResources(appInfo, source.name);
+
+    return mergedAppinfo;
+};
+
 export const downloadAppInfos = async (source: Source) => {
     const downloadableApps = await Promise.all(
-        getAppUrls(source).map(async appUrl => {
-            const appInfo = await downloadToJson<AppInfo>(appUrl);
-
-            if (path.basename(appUrl) !== `${appInfo.name}.json`) {
-                inRenderer.showErrorDialog(
-                    `At \`${appUrl}\` an app is found ` +
-                        `by the name \`${appInfo.name}\`, which does ` +
-                        `not match the URL. This app will be ignored.`,
-                );
-                return undefined;
-            }
-
-            const mergedAppinfo = writeAppInfo(appInfo, source, {
-                keepInstallInfo: true,
-            });
-
-            await downloadAppResources(appInfo, source.name);
-
-            return mergedAppinfo;
-        }),
+        getAppUrls(source).map(
+            async appUrl => await downloadAppInfo(appUrl, source),
+        ),
     );
 
     return downloadableApps.filter(defined);
