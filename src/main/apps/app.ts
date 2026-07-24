@@ -146,6 +146,8 @@ export const addInstalledAppData = (
 
         nrfutil: packageJson.nrfConnectForDesktop?.nrfutil,
         nrfutilCore: packageJson.nrfConnectForDesktop?.nrfutilCore,
+
+        autoUpdate: packageJson.nrfConnectForDesktop?.autoUpdate,
     };
 };
 
