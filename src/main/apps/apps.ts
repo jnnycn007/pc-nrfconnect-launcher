@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import { type InstalledDownloadableApp } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { type AppInfo } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import { omit } from 'lodash';
 import path, { basename } from 'path';
@@ -197,4 +198,36 @@ export const downloadAppInfos = async (source: Source) => {
     );
 
     return downloadableApps.filter(defined);
+};
+
+export const checkForAppsUpdate = async (apps: InstalledDownloadableApp[]) => {
+    const appUrls: [Source, string][] = getAllSources()
+        .filter(s => apps.some(app => app.source === s.name))
+        .flatMap(s =>
+            getAppUrls(s, { includeWithdrawnApps: false })
+                .filter(url =>
+                    apps.some(app => path.basename(url).startsWith(app.name)),
+                )
+                .map(url => [s, url] as [Source, string]),
+        );
+
+    const downloadableApps = (
+        await Promise.all(
+            appUrls
+                .map(async ([source, url]) => {
+                    const appInfo = await downloadAppInfo(url, source);
+                    if (appInfo)
+                        return addDownloadAppData(source.name)(appInfo);
+                })
+                .filter(Boolean),
+        )
+    )
+        .filter(defined)
+        .filter(
+            app =>
+                app.latestVersion !==
+                (app as InstalledDownloadableApp).currentVersion,
+        );
+
+    return addInstalledAppDatas(downloadableApps);
 };

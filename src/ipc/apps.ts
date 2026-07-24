@@ -60,6 +60,7 @@ export const hasFixedSize = (app: App): app is AppWithFixedSize =>
 
 const channel = {
     downloadLatestAppInfos: 'apps:download-latest-app-infos',
+    checkForAppsUpdate: 'apps:check-for-app-updates',
     getLocalApps: 'apps:get-local-apps',
     installLocalApp: 'apps:install-local-app',
     removeLocalApp: 'apps:remove-local-app',
@@ -74,6 +75,18 @@ const downloadLatestAppInfos = invoke<DownloadLatestAppInfos>(
 );
 const registerDownloadLatestAppInfos = handle<DownloadLatestAppInfos>(
     channel.downloadLatestAppInfos,
+);
+
+// checkForAppsUpdate
+type CheckForAppsUpdate = (
+    apps: InstalledDownloadableApp[],
+) => Omit<GetDownloadableAppsResult, 'sourcesWithErrors'>;
+
+const checkForAppsUpdate = invoke<CheckForAppsUpdate>(
+    channel.checkForAppsUpdate,
+);
+const registerCheckForAppsUpdate = handle<CheckForAppsUpdate>(
+    channel.checkForAppsUpdate,
 );
 
 // getLocalApps
@@ -153,6 +166,7 @@ const registerGetDownloadableApps = handle<GetDownloadableApps>(
 export const forRenderer = {
     ...forRendererFromShared,
     registerDownloadLatestAppInfos,
+    registerCheckForAppsUpdate,
     registerGetDownloadableApps,
     registerGetLocalApps,
     registerInstallLocalApp,
@@ -163,6 +177,7 @@ export const forRenderer = {
 export const inMain = {
     ...inMainFromShared,
     downloadLatestAppInfos,
+    checkForAppsUpdate,
     getDownloadableApps,
     getLocalApps,
     installLocalApp,

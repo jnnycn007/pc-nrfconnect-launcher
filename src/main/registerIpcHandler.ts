@@ -36,6 +36,7 @@ import {
     removeLocalApp,
 } from './apps/appChanges';
 import {
+    checkForAppsUpdate,
     downloadLatestAppInfos,
     getDownloadableApps,
     getLocalApps,
@@ -124,6 +125,7 @@ export default () => {
     open.forRenderer.registerOpenUrl(openUrl);
 
     apps.forRenderer.registerDownloadLatestAppInfos(downloadLatestAppInfos);
+    apps.forRenderer.registerCheckForAppsUpdate(checkForAppsUpdate);
     apps.forRenderer.registerGetLocalApps(getLocalApps);
     apps.forRenderer.registerInstallLocalApp(installLocalApp);
     apps.forRenderer.registerRemoveLocalApp(removeLocalApp);
