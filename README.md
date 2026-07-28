@@ -12,11 +12,8 @@ built-in libraries in order to create end-user tools.
 
 Read the
 [nRF Connect for Desktop](https://docs.nordicsemi.com/r/bundle/nrf-connect-for-desktop/page/index.html)
-official documentation, which includes information about
-installation,
-supported operating systems,
-available applications,
-and more.
+official documentation, which includes information about installation, supported
+operating systems, available applications, and more.
 
 ## Development
 
