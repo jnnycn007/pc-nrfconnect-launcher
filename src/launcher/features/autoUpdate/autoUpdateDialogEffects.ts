@@ -6,6 +6,7 @@
 
 import { type InstalledDownloadableApp } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
+import { getAutoUpdateEnabled } from '../../../common/persistedStore';
 import { type App, inMain } from '../../../ipc/apps';
 import type { AppThunk } from '../../store';
 import { addDownloadableApps } from '../apps/appsSlice';
@@ -18,7 +19,9 @@ export const checkForUpdatableApps =
         appsToBeChecked: InstalledDownloadableApp[],
     ): AppThunk<Promise<InstalledDownloadableApp[]>> =>
     async dispatch => {
-        const autoUpdatingApps = appsToBeChecked.filter(isAutoUpdatingApp);
+        const autoUpdatingApps = appsToBeChecked
+            .filter(isAutoUpdatingApp)
+            .filter(app => getAutoUpdateEnabled(app.name));
         if (autoUpdatingApps.length === 0) return [];
 
         const { apps: appsToBeUpdated } =

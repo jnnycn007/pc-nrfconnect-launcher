@@ -14,6 +14,7 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import cleanIpcErrorMessage from '../../../common/cleanIpcErrorMessage';
+import { setAutoUpdateEnabled } from '../../../common/persistedStore';
 import {
     type AppSpec,
     type AppWithError,
@@ -151,6 +152,10 @@ const install =
     ): AppThunk<Promise<DownloadableApp | undefined>> =>
     dispatch => {
         try {
+            setAutoUpdateEnabled(
+                app.name,
+                !version || version === app.latestVersion,
+            );
             return appsInMain.installDownloadableApp(app, version);
         } catch (error) {
             dispatch(resetAppInstallProgress(app));
