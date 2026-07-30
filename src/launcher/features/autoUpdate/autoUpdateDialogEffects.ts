@@ -5,14 +5,18 @@
  */
 
 import { type InstalledDownloadableApp } from '@nordicsemiconductor/pc-nrfconnect-shared';
+import { OFFICIAL } from '@nordicsemiconductor/pc-nrfconnect-shared/ipc/sources';
 
 import { getAutoUpdateEnabled } from '../../../common/persistedStore';
-import { type App, inMain } from '../../../ipc/apps';
+import { type App, inMain, isQuickStartApp } from '../../../ipc/apps';
 import type { AppThunk } from '../../store';
 import { addDownloadableApps } from '../apps/appsSlice';
 
 export const isAutoUpdatingApp = (app?: App): app is InstalledDownloadableApp =>
-    app != null && 'autoUpdate' in app && !!app.autoUpdate;
+    app != null &&
+    (('autoUpdate' in app && !!app.autoUpdate) ||
+        // We want to force people onto the auto updatable quickstart
+        (app.source === OFFICIAL && isQuickStartApp(app)));
 
 export const checkForUpdatableApps =
     (
