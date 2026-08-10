@@ -7,6 +7,11 @@ because it is so minor that the users will rarely care about them.
 It is still helpful that we collect them, e.g. so that we can check them when
 release the new version.
 
+## Unreleased
+
+- #1311: Feature for updating apps with `auto-update` enabled in package.json.
+  The update process triggers when clicking **Open**.
+
 ## 5.3.2
 
 ### Fixed
