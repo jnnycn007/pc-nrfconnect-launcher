@@ -9,6 +9,8 @@ release the new version.
 
 ## Unreleased
 
+- #1314: Temporarily force auto-update of the official Quick Start app, to get
+  users onto the version with cloud telemetry.
 - #1312: Toggle auto-update feature on/off in persisted store when installing
   any version (latest = on, other = off)
 - #1311: Feature for updating apps with `auto-update` enabled in package.json.
