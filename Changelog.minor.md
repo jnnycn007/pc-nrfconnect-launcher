@@ -9,6 +9,8 @@ release the new version.
 
 ## Unreleased
 
+- #1312: Toggle auto-update feature on/off in persisted store when installing
+  any version (latest = on, other = off)
 - #1311: Feature for updating apps with `auto-update` enabled in package.json.
   The update process triggers when clicking **Open**.
 
