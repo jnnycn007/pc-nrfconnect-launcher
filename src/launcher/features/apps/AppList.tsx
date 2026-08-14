@@ -9,6 +9,7 @@ import React from 'react';
 import { type App as AppType, isInstalled } from '../../../ipc/apps';
 import { useLauncherSelector } from '../../util/hooks';
 import WithScrollbarContainer from '../../util/WithScrollbarContainer';
+import AutoUpdateDialog from '../autoUpdate/AutoUpdateDialog';
 import AppFilterBar from '../filter/AppFilterBar';
 import { getAppsFilter } from '../filter/filterSlice';
 import ReleaseNotesDialog from '../releaseNotes/ReleaseNotesDialog';
@@ -49,6 +50,7 @@ export default () => {
             <ConfirmLaunchDialog />
             <InstallOtherVersionDialog />
             <ReleaseNotesDialog />
+            <AutoUpdateDialog />
         </>
     );
 };

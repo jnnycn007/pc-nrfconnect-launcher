@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
+import { type InstalledDownloadableApp } from '@nordicsemiconductor/pc-nrfconnect-shared';
 import { type AppInfo } from '@nordicsemiconductor/pc-nrfconnect-shared/main';
 import { omit } from 'lodash';
 import path, { basename } from 'path';
@@ -162,29 +163,71 @@ export const downloadLatestAppInfos = async () => {
     };
 };
 
+const downloadAppInfo = async (
+    appUrl: string,
+    source: Source,
+    failSilently = false,
+) => {
+    const appInfo = await downloadToJson<AppInfo>(appUrl);
+
+    if (path.basename(appUrl) !== `${appInfo.name}.json`) {
+        if (!failSilently) {
+            inRenderer.showErrorDialog(
+                `An app is found at \`${appUrl}\` ` +
+                    `using the name \`${appInfo.name}\`, which does ` +
+                    `not match the URL. This app will be ignored.`,
+            );
+        }
+        return undefined;
+    }
+
+    const mergedAppinfo = writeAppInfo(appInfo, source, {
+        keepInstallInfo: true,
+    });
+
+    await downloadAppResources(appInfo, source.name);
+
+    return mergedAppinfo;
+};
+
 export const downloadAppInfos = async (source: Source) => {
     const downloadableApps = await Promise.all(
-        getAppUrls(source).map(async appUrl => {
-            const appInfo = await downloadToJson<AppInfo>(appUrl);
-
-            if (path.basename(appUrl) !== `${appInfo.name}.json`) {
-                inRenderer.showErrorDialog(
-                    `At \`${appUrl}\` an app is found ` +
-                        `by the name \`${appInfo.name}\`, which does ` +
-                        `not match the URL. This app will be ignored.`,
-                );
-                return undefined;
-            }
-
-            const mergedAppinfo = writeAppInfo(appInfo, source, {
-                keepInstallInfo: true,
-            });
-
-            await downloadAppResources(appInfo, source.name);
-
-            return mergedAppinfo;
-        }),
+        getAppUrls(source).map(
+            async appUrl => await downloadAppInfo(appUrl, source),
+        ),
     );
 
     return downloadableApps.filter(defined);
+};
+
+export const checkForAppsUpdate = async (apps: InstalledDownloadableApp[]) => {
+    const appUrls: [Source, string][] = getAllSources()
+        .filter(s => apps.some(app => app.source === s.name))
+        .flatMap(s =>
+            getAppUrls(s, { includeWithdrawnApps: false })
+                .filter(url =>
+                    apps.some(app => path.basename(url).startsWith(app.name)),
+                )
+                .map(url => [s, url] as [Source, string]),
+        );
+
+    const downloadableApps = (
+        await Promise.all(
+            appUrls
+                .map(async ([source, url]) => {
+                    const appInfo = await downloadAppInfo(url, source);
+                    if (appInfo)
+                        return addDownloadAppData(source.name)(appInfo);
+                })
+                .filter(Boolean),
+        )
+    )
+        .filter(defined)
+        .filter(
+            app =>
+                app.latestVersion !==
+                (app as InstalledDownloadableApp).currentVersion,
+        );
+
+    return addInstalledAppDatas(downloadableApps);
 };

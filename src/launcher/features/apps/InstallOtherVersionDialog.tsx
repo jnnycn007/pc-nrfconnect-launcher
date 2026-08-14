@@ -100,9 +100,12 @@ export default () => {
             }}
         >
             <p>
-                You can install an old version of “{appName}”, but please note
-                that only running the latest version is supported by Nordic
-                Semiconductor.
+                You can install an older version of {appName}, but{' '}
+                {installOtherVersionDialog.isVisible &&
+                    'autoUpdate' in installOtherVersionDialog.app &&
+                    installOtherVersionDialog.app.autoUpdate &&
+                    'this turns off the autoupdate feature of this app and'}{' '}
+                only the latest version is supported by Nordic Semiconductor.
             </p>
 
             <form className={styles.versionListLine}>

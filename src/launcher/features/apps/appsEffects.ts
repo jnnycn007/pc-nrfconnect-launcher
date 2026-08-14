@@ -14,6 +14,7 @@ import {
 } from '@nordicsemiconductor/pc-nrfconnect-shared';
 
 import cleanIpcErrorMessage from '../../../common/cleanIpcErrorMessage';
+import { setAutoUpdateEnabled } from '../../../common/persistedStore';
 import {
     type AppSpec,
     type AppWithError,
@@ -144,24 +145,39 @@ export const installLocalApp =
     };
 
 const install =
-    (app: DownloadableApp, version?: string): AppThunk =>
+    (
+        app: DownloadableApp,
+        version?: string,
+        showErrorDialog = true,
+    ): AppThunk<Promise<DownloadableApp | undefined>> =>
     dispatch => {
         try {
-            appsInMain.installDownloadableApp(app, version);
-        } catch (error) {
-            dispatch(
-                ErrorDialogActions.showDialog(
-                    `Unable to install downloadable app.`,
-                    undefined,
-                    cleanIpcErrorMessage(describeError(error)),
-                ),
+            setAutoUpdateEnabled(
+                app.name,
+                !version || version === app.latestVersion,
             );
+            return appsInMain.installDownloadableApp(app, version);
+        } catch (error) {
             dispatch(resetAppInstallProgress(app));
+            if (showErrorDialog) {
+                dispatch(
+                    ErrorDialogActions.showDialog(
+                        `Unable to install downloadable app.`,
+                        undefined,
+                        cleanIpcErrorMessage(describeError(error)),
+                    ),
+                );
+                return Promise.resolve(undefined);
+            }
+            throw cleanIpcErrorMessage(describeError(error));
         }
     };
 
 export const installDownloadableApp =
-    (app: DownloadableApp, toVersion?: string): AppThunk =>
+    (
+        app: DownloadableApp,
+        toVersion?: string,
+    ): AppThunk<Promise<DownloadableApp | undefined>> =>
     dispatch => {
         telemetry.sendEvent(EventAction.APP_MANAGEMENT, {
             action: toVersion == null ? 'Install' : 'Install Explicit Version',
@@ -178,7 +194,10 @@ export const installDownloadableApp =
     };
 
 export const updateDownloadableApp =
-    (app: DownloadableApp): AppThunk =>
+    (
+        app: DownloadableApp,
+        showErrorDialog = true,
+    ): AppThunk<Promise<DownloadableApp | undefined>> =>
     dispatch => {
         telemetry.sendEvent(EventAction.APP_MANAGEMENT, {
             action: 'Update',
@@ -191,7 +210,7 @@ export const updateDownloadableApp =
         });
 
         dispatch(updateDownloadableAppStarted(app));
-        return dispatch(install(app));
+        return dispatch(install(app, undefined, showErrorDialog));
     };
 
 export const removeDownloadableApp =

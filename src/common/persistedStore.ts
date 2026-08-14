@@ -27,6 +27,7 @@ interface Schema {
     lastBundledAppInstalledVersion: string;
     isQuickStartInfoShownBefore: boolean;
     [lastWindowState: `lastWindowState.${string}`]: WindowState;
+    [autoUpdateEnabled: `autoUpdateEnabled.${string}`]: boolean;
     updateCheck: {
         doOnStartup: boolean;
         lastUpdate?: Date;
@@ -152,3 +153,8 @@ export const setUseChineseAppServer = (useChineseAppServer: boolean) =>
     store.set('useChineseAppServer', useChineseAppServer);
 
 export const getUpdateChannel = () => store.get('updateChannel');
+
+export const getAutoUpdateEnabled = (app: string) =>
+    store.get(`autoUpdateEnabled.${app}`, true);
+export const setAutoUpdateEnabled = (app: string, enableAutoUpdate: boolean) =>
+    store.set(`autoUpdateEnabled.${app}`, enableAutoUpdate);
