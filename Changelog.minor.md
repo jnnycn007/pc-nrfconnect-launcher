@@ -9,6 +9,7 @@ release the new version.
 
 ## Unreleased
 
+- #1320: Update Electron to v43.
 - #1314: Temporarily force auto-update of the official Quick Start app, to get
   users onto the version with cloud telemetry.
 - #1312: Toggle auto-update feature on/off in persisted store when installing
