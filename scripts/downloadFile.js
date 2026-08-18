@@ -4,66 +4,72 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
  */
 
-const axios = require('axios');
-const fs = require('fs');
-const { mkdir } = require('fs/promises');
-const path = require('path');
 const crypto = require('crypto');
+const fs = require('fs');
+const { mkdir, unlink } = require('fs/promises');
+const path = require('path');
+const { Writable } = require('stream');
 
-const downloadChecksum = async fileUrl => {
-    console.log('Downloading', fileUrl);
-    try {
-        const { status, data } = await axios.get(fileUrl);
-        if (status !== 200) {
-            throw new Error(
-                `Unable to download ${fileUrl}. Got status code ${status}`,
-            );
-        }
-        return data;
-    } catch (error) {
-        throw new Error(`Unable to download ${fileUrl}: ${error.message}`);
-    }
-};
-
-module.exports = async (fileUrl, destinationFile, useChecksum = false) => {
-    const hash = crypto.createHash('sha256');
-
-    console.log('Started Download', fileUrl);
-    const { status, data: stream } = await axios.get(fileUrl, {
-        responseType: 'stream',
-    });
-    if (status !== 200) {
+const downloadChecksumFile = async fileUrl => {
+    console.log('Downloading checksum file', fileUrl);
+    const response = await fetch(fileUrl);
+    if (!response.ok) {
         throw new Error(
-            `Unable to download ${fileUrl}. Got status code ${status}`,
+            `Unable to download ${fileUrl}. Got status code ${response.status}`,
         );
     }
+    return (await response.text()).trim().split(/\s+/)[0];
+};
+
+const createChecksumChecker = async fileUrl => {
+    const expectedChecksum = await downloadChecksumFile(`${fileUrl}.sha256`);
+    const hash = crypto.createHash('sha256');
+
+    return {
+        transformStream: () =>
+            new TransformStream({
+                transform: (chunk, controller) => {
+                    hash.update(chunk);
+                    controller.enqueue(chunk);
+                },
+            }),
+
+        verify: async destinationFile => {
+            const calculatedChecksum = hash.digest('hex');
+
+            if (calculatedChecksum !== expectedChecksum) {
+                console.log('Calculated checksum:', calculatedChecksum);
+                console.log('Expected checksum:  ', expectedChecksum);
+
+                await unlink(destinationFile);
+                throw new Error('Checksum verification failed.');
+            }
+        },
+    };
+};
+
+module.exports = async (fileUrl, destinationFile) => {
+    const checksumChecker = await createChecksumChecker(fileUrl);
+
+    console.log('🏎️ Started Download', fileUrl);
+    const response = await fetch(fileUrl);
+    if (!response.ok) {
+        throw new Error(
+            `Unable to download ${fileUrl}. Got status code ${response.status}`,
+        );
+    }
+    if (!response.body) {
+        throw new Error(`Unable to download ${fileUrl}: Empty response body`);
+    }
+
     await mkdir(path.dirname(destinationFile), { recursive: true });
-    return new Promise((resolve, reject) => {
-        const file = fs.createWriteStream(destinationFile);
-        stream.pipe(file);
-        stream.on('data', data => hash.update(data));
-        stream.on('error', reject);
-        stream.on('end', () => {
-            file.end(async () => {
-                console.log('🏁 Finish Download', fileUrl);
-                console.log('🏁 Saved to', destinationFile);
-                if (useChecksum) {
-                    const calculatedChecksum = hash.digest('hex');
-                    const expectedChecksum = await downloadChecksum(
-                        `${fileUrl}.sha256`,
-                    );
 
-                    if (calculatedChecksum !== expectedChecksum) {
-                        fs.unlinkSync(destinationFile);
-                        console.log('Calculated checksum:', calculatedChecksum);
-                        console.log('Expected checksum:  ', expectedChecksum);
-                        reject(new Error('Checksum verification failed.'));
-                        return;
-                    }
-                }
+    await response.body
+        .pipeThrough(checksumChecker.transformStream())
+        .pipeTo(Writable.toWeb(fs.createWriteStream(destinationFile)));
 
-                resolve();
-            });
-        });
-    });
+    console.log('🏁 Finish Download', fileUrl);
+    console.log('🏁 Saved to', destinationFile);
+
+    await checksumChecker.verify(destinationFile);
 };

@@ -15,5 +15,5 @@ exports.default = async () => {
         recursive: true,
     });
 
-    await Promise.allSettled([getJlink(), bundleApps()]);
+    await Promise.all([getJlink(), bundleApps()]);
 };

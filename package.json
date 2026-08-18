@@ -127,7 +127,6 @@
     },
     "dependencies": {
         "@electron/remote": "^2.1.2",
-        "axios": "0.22.0",
         "chmodr": "1.2.0",
         "electron-store": "8.1.0",
         "electron-updater": "4.3.7",

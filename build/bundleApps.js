@@ -60,20 +60,19 @@ const isAppBundled = appJSONUrl =>
     BUNDLE_APPS.find(app => app === path.parse(appJSONUrl).name);
 
 const parseSourceFile = appUrls =>
-    Promise.allSettled(
+    Promise.all(
         appUrls.apps.map(async appJSONUrl => {
             const dstPath = url =>
                 path.join('resources', 'prefetched', path.basename(url));
 
-            await downloadFile(appJSONUrl, dstPath(appJSONUrl), false);
+            await downloadFile(appJSONUrl, dstPath(appJSONUrl));
             const appJSON = JSON.parse(fs.readFileSync(dstPath(appJSONUrl)));
 
-            await Promise.allSettled([
-                downloadFile(appJSON.iconUrl, dstPath(appJSON.iconUrl), false),
+            await Promise.all([
+                downloadFile(appJSON.iconUrl, dstPath(appJSON.iconUrl)),
                 downloadFile(
                     appJSON.releaseNotesUrl,
                     dstPath(appJSON.releaseNotesUrl),
-                    false,
                 ),
             ]);
 
@@ -96,7 +95,6 @@ const parseSourceFile = appUrls =>
                         appBundlesPath,
                         path.basename(latestVersion.tarballUrl),
                     ),
-                    false,
                 ),
             );
 
@@ -112,7 +110,7 @@ const parseSourceFile = appUrls =>
                 });
             }
 
-            await Promise.allSettled(promises);
+            await Promise.all(promises);
         }),
     );
 
@@ -120,7 +118,6 @@ exports.default = async () => {
     await downloadFile(
         SOURCE_URL,
         `resources/prefetched/${path.basename(SOURCE_URL)}`,
-        false,
     );
 
     const appUrls = JSON.parse(
